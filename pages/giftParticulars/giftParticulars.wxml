@@ -1,0 +1,28 @@
+<!--pages/giftParticulars/giftParticulars.wxml-->
+
+<!--pages/add/add.wxml-->
+<!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
+<view class='body'>
+  <view class='content'>
+    <!--头部复用  -->
+    <view class='contentList'>
+      <view class='contentHead'>
+        <image class='userBack' src='{{item.picPath==null?"../../images/default.png":item.picPath}}'></image>
+      </view>
+    </view>
+  </view>
+
+  <view class='prize'>奖品:{{item.name}}×{{item.amount}}份</view>
+  <view class='lotteryData'>
+    <view class='date'>{{item.awardTime}}</view>
+    <view class='lotteryWay'>自动抽奖</view>
+  </view>
+
+  <view class='share'>邀请好友抽奖
+    <button open-type="share" class='shareBtn'></button>
+  </view>
+  <view class='producePhoto' bindtap='producePhoto'>生成分享图片</view>
+    <view class='producePhoto' bindtap='gohome'>回到首页
+   
+  </view>
+</view>

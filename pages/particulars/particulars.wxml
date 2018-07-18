@@ -1,0 +1,104 @@
+<!--pages/particulars/particulars.wxml-->
+<view class='body'>
+  <view class='content'>
+    <view class='contentList'>
+      <view class='contentHead'>
+        <view class='labelLeft'>
+          <view class='labelText'>{{item.giftCard.type=='0000'?"抽奖":item.giftCard.type}}</view>
+        </view>
+        <view class='leabelRight' wx:if='{{item.giftCard.sponsor!=""?false:item.giftCard.sponsor!=null?false:""}}'>{{item.giftCard.sponsor}}</view>
+        <image class='userBack' src='{{item.giftCard.picPath==null?"../../images/default.png":item.giftCard.picPath}}'></image>
+      </view>
+      <view class='prize'>奖品:{{item.giftCard.name}}×{{item.giftCard.amount}}份</view>
+      <view class='lotteryData'>
+        <view class='date'>{{item.giftCard.awardTime}}</view>
+        <view class='lotteryWay'>自动开奖</view>
+      </view>
+      <view class='sponsor'>
+        <view class='sponsorText'>发起人</view>
+        <view class='sponsorData'>
+          <view class='sponsorDataTxt'>{{item.createrInfo.nickName}}</view>
+          <view>
+            <image src='{{item.createrInfo.avatarUrl}}'></image>
+          </view>
+        </view>
+      </view>
+      <view class='sponsor sponsor1' wx:if="{{item.isCreator=='true'&&item.giftCard.status=='1000'}}" bindtap='winUserInfo' data-id='{{item.giftCard.id}}'>
+        <view class='sponsorText'>查看中奖者信息</view>
+        <view class='sponsorData'>
+          <view>
+            <image class='rig' src='../../images/rig.png'></image>
+          </view>
+        </view>
+      </view>
+      <view class='dividing'></view>
+      <view class='introduce' wx:if="{{item.vip=='true'}}">
+        <view class='introduceHead'>奖品介绍：</view>
+        <view class='introduceTxt'>{{item.introduceTxt}}</view>
+      </view>
+      <view class='foot'>
+        <view class='footPadding' wx:if="{{item.isParticipated=='false'&&item.giftCard.status=='0000'}}">
+          <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true' >
+            <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+            <view class='participationY participation' data-id='{{item.giftCard.id}}' bindtap='participationY'>{{item.isParticipated=='false'?'参与抽奖':item.isParticipated}}
+            </view>
+             <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}'>Submit</button>
+          </form>
+        </view>
+        <view class='footPadding' wx:if="{{item.isParticipated=='true'&&item.giftCard.status=='0000'}}">
+          <view class='participation'>{{item.isParticipated=='true'?'待开奖':item.isParticipated}}</view>
+        </view>
+        <!-- <view class='participationN participation' wx:if="{{item.giftCard=='1'&&item.isParticipated=='0'}}">{{item.giftCard=='1'?'已结束':item.giftCard}}</view> -->
+        <!-- -->
+        <view class='won isWon' wx:if="{{item.isWon=='true'&&item.giftCard.status=='1000'}}">
+          <view class='wonLogo'>
+            <image src='../../images/won.png'></image>
+          </view>
+          <view class='wonText'>恭喜，您中奖了</view>
+          <view class='wonGiftText'>奖品:{{item.giftCard.name}}</view>
+          <!-- <view class='noHasAddAddress' wx:if="{{item.address==null}}">
+            <view class='addAddress'>添加钱包地址</view>
+          </view> -->
+          <!--  -->
+          <view class='hasAddAddress' bindtap='select'>
+            <view class='hasAddress'>
+              <view class='address'>{{(item.address==null||item.address=='')?'请填写钱包地址':item.address}}</view>
+
+            </view>
+            <view class='modificationAddress' wx:if="{{item.address!=null}}" bindtap='select'>(点击修改)</view>
+          </view>
+        </view>
+
+        <view class='noWon isWon' wx:if="{{item.isWon=='false'&&item.giftCard.status=='1000'}}">
+          <view class='noWonLogo'>
+            <image src='../../images/noWon.png'></image>
+          </view>
+          <view class='noWonText'>很遗憾，您没有中奖</view>
+        </view>
+
+
+
+
+
+
+
+        <view class='num' wx:if="{{item.giftCard.status=='0000'}}">已有{{item.participantCount}}人参与抽奖</view>
+        <view class='photo' wx:if="{{item.giftCard.status=='0000'}}">
+          <image wx:for="{{item.participantList}}" wx:key="index" src='{{item}}'></image>
+        </view>
+        <view class='num' wx:else="{{item.giftCard.status=='1000'}}">中奖者名单</view>
+        <view class='photo' wx:if="{{item.giftCard.status=='1000'}}">
+          <image wx:for="{{item.winnerList}}" wx:key="index" src='{{item}}'></image>
+        </view>
+      </view>
+    </view>
+    <view class='bottom'>
+      <view class='bottomLeft'>分享给朋友
+        <button open-type="share" class='shareBtn'></button>
+      </view>
+      <view class='bottomRight' wx:if="{{pageId=='0'}}" bindtap='backHome'>回到首页</view>
+      <view class='bottomRight' wx:else="{{pageId=='1'}}" bindtap='initiate'>我也要发起抽奖</view>
+
+    </view>
+  </view>
+</view>

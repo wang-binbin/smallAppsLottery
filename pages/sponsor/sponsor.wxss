@@ -1,0 +1,32 @@
+/* pages/sponsor/sponsor.wxss */
+.head{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+ background: #F2F2EF;
+ text-align: left;
+ font-size: 14px;
+color: #585858;
+}
+.content{
+  margin: 20px 15px 0 15px;
+}
+.footTxt{
+  margin-top: 30px;
+}
+.logo{
+  width: 157px;
+  height: 157px;
+  margin: 0 auto;
+  margin-top: 75px;
+  margin-bottom: 16px;
+}
+.logo image{
+  width: 100%;
+  height: 100%;
+}
+.head .logoTxt{
+  text-align: center;
+}

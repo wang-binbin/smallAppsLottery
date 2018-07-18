@@ -1,0 +1,28 @@
+<!--pages/compileAddress/compileAddress.wxml-->
+<view class='body'>
+  <view class='content'>
+    <view class='accountList'>
+      <view class='accountName'>钱包名称</view>
+      <view class='accountNameIn'>
+        <input value='{{item.accountName}}' bindinput='accountName'></input>
+      </view>
+    </view>
+    <view class='accountList accountListaddress' >
+      <view class='accountName'>钱包地址</view>
+      <view class='accountNameIn'>
+        <textarea bindinput="address"  value='{{item.address}}' placeholder='请输入钱包地址' maxlength='-1' />
+        <!-- <input value='{{item.address}}' bindinput='address'></input> -->
+      </view>
+    </view>
+
+  </view>
+  <!-- <view class='isdefault'>
+    <view class='isdefaultImage' bindtap='Default'>
+      <image src='../../images/isdefault.png' wx:if="{{isdefault}}"></image>
+      <image src='../../images/nodefault.png' wx:else='{{isdefault}}'></image>
+    </view>
+    <view class='defaultText' >设为默认</view>
+  </view> -->
+  <view class='modification' bindtap='modification'>修改</view>
+  <view class='delete' bindtap='Delete' data-id='{{item.addressid}}'>删除</view>
+</view>

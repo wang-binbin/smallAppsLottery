@@ -1,0 +1,42 @@
+<!--pages/user/user.wxml-->
+<view class='body'>
+  <view class='head'>
+    <view class='portrait'>
+      <image src='{{userInfo.avatarUrl}}'></image>
+    </view>
+    <view class='nickname'>{{userInfo.nickName}}</view>
+    <view class='walletAddress' bindtap='walletAddress'>钱包地址
+      <image src='../../images/rig.png'></image>
+    </view>
+  </view>
+  <view class='content'>
+    <view class='myGift' bindtap='myAddGiftCard'>
+      <view class='myLogo'>
+        <image src='../../images/mygift.png'></image>
+      </view>
+      <view class='myText'>我的礼品卡</view>
+      <view class='myRig'>
+        <image src='../../images/rig.png'></image>
+      </view>
+    </view>
+    <view class='myAddGift' bindtap='myGiftCard'>
+      <view class='myLogo'>
+        <image src='../../images/myAddGift.png'></image>
+      </view>
+      <view class='myText'>我生成的礼品卡</view>
+      <view class='myRig'>
+        <image src='../../images/rig.png'></image>
+      </view>
+    </view>
+    <!-- <view class='myBalance'>
+      <view class='myLogo'>
+        <image src='../../images/myBalance.png'></image>
+      </view>
+      <view class='myText'>我的通证余额</view>
+      <view class='myRig'>
+        <image src='../../images/rig.png'></image>
+      </view>
+    </view> -->
+  </view>
+  <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+</view>

@@ -1,0 +1,62 @@
+
+<!--pages/add/add.wxml-->
+
+<view class='body'>
+<view class='content'>
+  <!--头部复用  -->
+  <view class='contentList'>
+    <view class='contentHead'>
+      <view class='labelLeft'>
+        <!-- <view class='labelText'>{{item.Type}}</view> -->
+      </view>
+      <view class='leabelRight' bindtap='cehngePhoto'>更换奖品图片</view>
+      <image class='userBack' src='{{src}}'></image>
+    </view>
+  </view>
+</view>
+
+  <view class='head'>
+    <view class='prizeName'>
+      <view class='prizeNameOne'>
+        <view class=''>奖品名称</view>
+        <view class="section">
+          <input type="text" bindinput='inputchange' value='{{name}}' placeholder="请输入奖品名称，如1000mag" maxlength='24' placeholder-style='font-size: 15px;color: #B7B7B7;' />
+        </view>
+        <view class='warning' wx:if='{{byte}}' >不能超过24个字符、8个字</view>
+      </view>
+
+    </view>
+    <view class='prizeNumber'>
+      <view class=''>奖品数量</view>
+      <view class='part'>份</view>
+      <view class="num">
+        <input type="number" placeholder="数量不得超过999" value='{{amount}}' bindinput='numberchange'  maxlength='3' placeholder-style='font-size: 15px;color: #B7B7B7;' />
+      </view>
+<view class='warning' wx:if='{{bytenumber}}'>数量不得超过   999</view>
+    </view>
+  </view>
+
+  <view class='foot'>
+    <view class='footTitle'>奖品到达设定时间自动开奖</view>
+    <view class='LotteryStart'>
+      <view class='starttime'>开奖时间</view>
+      <view class="section__title">
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+          <view class="picker">
+            {{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}:{{multiArray[2][multiIndex[2]]}}
+            <image class='rightpicker' src='../../images/rig.png'></image>
+          </view>
+        </picker>
+      </view>
+      <view class='warning' wx:if='{{newDate}}'>开奖时间不得低于现在时间</view>
+    </view>
+
+  </view>
+  <view class='bottom' bindtap='establish'>
+   <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true' >
+    生成礼品卡
+          <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}'>Submit</button>
+          </form>
+  </view>
+  <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> 
+</view>

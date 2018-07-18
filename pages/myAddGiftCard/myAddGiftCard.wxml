@@ -1,0 +1,95 @@
+<!--pages/myAddGiftCard/myAddGiftCard.wxml-->
+<!--标题的页面  -->
+<view class='body'>
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">待开奖
+      <view class="swiper-tab-bott" wx:if="{{currentTab==0 }}"></view>
+    </view>
+
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已开奖
+      <view class="swiper-tab-bott" wx:if="{{currentTab==1 }}"></view>
+    </view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">已中奖
+      <view class="swiper-tab-bott" wx:if="{{currentTab==2 }}"></view>
+    </view>
+  </view>
+  <view class='helpfixed'></view>
+
+  <!--滚动的页面  -->
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:100%' bindchange="bindChange">
+    <view class='div'>
+      <!--已参与待开奖  -->
+      <swiper-item style=' overflow: auto;height: 500px;'>
+        <view class='contentList' wx:for="{{openList}}" wx:key="index" data-id='{{item.id}}' bindtap='particulars'>
+          <view class='contentHead'>
+            <view class='labelLeft'>
+              <!-- <view class='labelText'>{{item.giftCard.type=='0000'?"抽奖":item.giftCard.type}}</view> -->
+            </view>
+            <view class='leabelRight' wx:if='{{item.sponsor!=""?false:item.sponsor!=null?false:""}}'>{{item.sponsor}}</view>
+            <image class='userBack' src='{{item.picPath==null?"../../images/default.png":item.picPath}}'></image>
+          </view>
+          <view class='prize'>奖品:{{item.name}}×{{item.amount}}份</view>
+          <view class='lotteryData'>
+            <view class='participation'>
+              <view>
+                <image src='../../images/participation.png'></image>
+              </view>
+              <view class='participationY'>已参与</view>
+              <view class='vertical'>|</view>
+            </view>
+            <view class='date'>{{item.awardTime}}</view>
+            <view class='lotteryWay'>自动开奖</view>
+          </view>
+        </view>
+      </swiper-item>
+
+      <!--已开奖  -->
+      <swiper-item style=' overflow: auto;height: 500px;'>
+        <view class='contentList' wx:for="{{closedList}}" wx:key="index" data-id='{{item.id}}' bindtap='particulars'>
+          <view class='contentHead'>
+            <view class='labelLeft'>
+              <!-- <view class='labelText'>{{item.giftCard.type=='0000'?"抽奖":item.giftCard.type}}</view> -->
+            </view>
+            <view class='leabelRight' wx:if='{{item.sponsor!=""?false:item.sponsor!=null?false:""}}'>{{item.sponsor}}</view>
+            <image class='userBack' src='{{item.picPath==null?"../../images/default.png":item.picPath}}'></image>
+          </view>
+          <view class='prize'>奖品:{{item.name}}×{{item.amount}}份</view>
+          <view class='lotteryData'>
+            <view class='participation'>
+
+              <view class='participationY miss' wx:if='{{item.statusIsWon=="false"}}'>未抽中</view>
+              <view class='participationY win' wx:if='{{item.statusIsWon=="true"}}'>已中奖</view>
+              <view class='vertical'>|</view>
+            </view>
+            <view class='date'>{{item.awardTime}}</view>
+            <view class='lotteryWay'>自动开奖</view>
+          </view>
+        </view>
+      </swiper-item>
+
+      <!--已中奖  -->
+      <swiper-item style=' overflow: auto;height: 500px;'>
+        <view class='contentList' wx:for="{{wonList}}" wx:key="index" data-id='{{item.id}}' bindtap='particulars'>
+          <view class='contentHead'>
+            <view class='labelLeft'>
+              <!-- <view class='labelText'>{{item.giftCard.type=='0000'?"抽奖":item.giftCard.type}}</view> -->
+            </view>
+            <view class='leabelRight' wx:if='{{item.sponsor!=""?false:item.sponsor!=null?false:""}}'>{{item.sponsor}}</view>
+            <image class='userBack' src='{{item.picPath==null?"../../images/default.png":item.picPath}}'></image>
+          </view>
+          <view class='prize'>奖品:{{item.name}}×{{item.amount}}份</view>
+          <view class='lotteryData'>
+            <view class='participation'>
+
+              <view class='participationY win'>已中奖</view>
+              <view class='vertical'>|</view>
+            </view>
+            <view class='date'>{{item.awardTime}}</view>
+            <view class='lotteryWay'>自动开奖</view>
+          </view>
+        </view>
+      </swiper-item>
+    </view>
+  </swiper>
+
+</view>

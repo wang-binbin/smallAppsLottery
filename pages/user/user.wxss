@@ -1,0 +1,112 @@
+/* pages/user/user.wxss */
+
+.body {
+  background: #f2f2ef;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.head {
+  width: 100%;
+  height: 100px;
+  background: #fff;
+  margin-top: 10px;
+}
+
+.head view {
+  float: left;
+}
+
+.userinfo {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+  opacity: 0;
+}
+
+.portrait {
+  margin-left: 15px;
+  padding-top: 24px;
+  width: 52px;
+  height: 52px;
+}
+
+.portrait image {
+  border-radius: 40px;
+  width: 100%;
+  height: 100%;
+}
+
+.nickname {
+  font-size: 15px;
+  color: #181818;
+  line-height: 100px;
+  margin-left: 13px;
+}
+
+.head .walletAddress {
+  line-height: 100px;
+  font-size: 13px;
+  float: right;
+  color: #838383;
+  margin-right: 15px;
+}
+
+.walletAddress image {
+  margin-left: 12px;
+  width: 6px;
+  height: 12px;
+}
+
+.content {
+  margin-top: 10px;
+  width: 100%;
+  background: #fff;
+}
+
+.myGift, .myAddGift, .myBalance {
+  clear: both;
+  height: 51px;
+  font-size: 14px;
+  color: #181818;
+  margin: 0 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.myGift view, .myAddGift view, .myBalance view {
+  float: left;
+}
+
+.myLogo {
+  line-height: 57px;
+}
+
+.myText {
+  line-height: 51px;
+}
+
+.content .myRig {
+  float: right;
+  line-height: 57px;
+}
+
+.content .myRig  image {
+  margin-right: 12px;
+  width: 6px;
+  height: 12px;
+}
+
+.myLogo image {
+  margin-right: 16px;
+  width: 18px;
+  height: 14px;
+}
+.myBalance{
+  border: none;
+}

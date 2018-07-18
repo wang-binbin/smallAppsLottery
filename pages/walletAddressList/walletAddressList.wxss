@@ -1,0 +1,101 @@
+/* pages/walletAddressList/walletAddressList.wxss */
+
+.body {
+  background: #f2f2ef;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.content {
+  width: 100%;
+  margin-top: 10px;
+  background: #fff;
+  margin-bottom: 100px;
+}
+
+.walletAddressList {
+  clear: both;
+  height: 81px;
+  margin: 0 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.listText {
+  font-size: 16px;
+  color: #444;
+  line-height: 40px;
+}
+.listContent view{
+float: left;
+}
+.list{
+   float: left; 
+  width: 17px;
+  height: 100%;
+  border-radius: 50px;
+  overflow: hidden;
+  margin-right: 8px;
+}
+.list image{
+width: 17px;
+height: 17px;
+margin-top: 30px;
+}
+.default {
+  background: rgba(255, 152, 101, 0.26);
+  border-radius: 5px;
+  width: 44px;
+  margin-right: 10px;
+  margin-top: 9px;
+  height: 21px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 21px;
+  color: #fa7635;
+}
+.address{
+line-height: 40px;font-size: 11px;
+float: left;
+width: 220px;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+color: #878787;
+}
+ .listContent .compile{
+  font-size: 14px;
+color: #B7B7B7;
+line-height: 40px;
+float: right;
+}
+.addAddrName{
+  position: relative;
+  background: #FFFFFF;
+  margin-top: 10px;
+  height: 49px;font-size: 16px;
+  padding-left: 15px;
+color: #444444;
+  line-height: 49px;
+
+}
+.addAddrNameImg{
+  position: absolute;
+  top: 20px;
+  width: 6px;
+  height: 12px;
+  right: 30px;
+}
+.bottom{
+  background: #FA7635;
+  width: 100%;
+  text-align: center;
+  line-height: 49px;
+font-size: 15px;
+color: #FFFFFF;
+  height: 49px;
+  position: fixed;
+  bottom: 0;
+}

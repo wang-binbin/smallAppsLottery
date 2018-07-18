@@ -1,0 +1,154 @@
+/* pages/home/home.wxss */
+
+.head {
+  height: 51px;
+  width: 100%;
+  background: #f2f2ef;
+  line-height: 51px;
+}
+
+.share {
+  float: right;
+  font-size: 14px;
+  line-height: 51px;
+  color: #8a8a8a;
+  position: relative;
+}
+
+.welfare {
+  float: left;
+  color: #fa7635;
+  font-size: 18px;
+  margin-left: 15px;
+}
+
+.share view {
+  float: left;
+  height: 51px;
+}
+
+.shareIcon image {
+  margin: 18px 15px 0 8px;
+  width: 14px;
+  height: 15px;
+}
+
+.content {
+  clear: both;
+}
+
+.contentList {
+  width: 100%;
+  height: 268px;
+  position: relative;
+}
+
+.dividing {
+  clear: both;
+  height: 10px;
+  width: 100%;
+  background: #f2f2ef;
+  position: absolute;
+  bottom: 0;
+}
+
+.labelLeft {
+  float: left;
+  position: absolute;
+  background: url("https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/label.png");
+  background-size: cover;
+  height: 30px;
+  width: 58px;
+}
+
+.labelText {
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  width: 48px;
+  font-size: 13px;
+}
+
+.contentHead {
+  height: 180px;
+  position: relative;
+}
+
+.userBack {
+  height: 100%;
+  width: 100%;
+
+}
+
+.leabelRight {
+  float: right;
+  right: 10px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.50);
+  border-radius: 10px;
+  width: 90px;
+  height: 28px;
+  color: white;
+  margin-top: 10px;
+  text-align: center;
+  line-height: 28px;
+  font-size: 13px;
+  /* margin-right: 10px; */
+}
+
+.prize {
+  color: #444;
+  font-size: 17px;
+  background: #fff;
+  line-height: 50px;
+  padding-left: 15px;
+}
+
+.lotteryData {
+  padding-left: 15px;
+  height: 30px;
+  background: #fff;
+}
+
+.lotteryData view {
+  float: left;
+  font-size: 13px;
+  color: #939393;
+}
+
+.lotteryWay {
+  margin-left: 7px;
+}
+
+.participation image {
+  width: 12.5px;
+  height: 12.5px;
+}
+.lotteryData .participationY{
+  font-size: 13px;
+  margin-left: 3px;
+color: #53AD21;
+}
+.lotteryData  .vertical{
+  margin: 0 5px;
+  height: 15px;
+  overflow: hidden;
+  color: #C3C3C3;
+}
+.trunSponsor{
+  font-size: 14px;
+  text-align: center;
+
+  height: 40px;
+  line-height: 40px;
+  background: #f2f2ef;
+color: #fa7635;
+
+}
+.tuceng{
+  width: 50px;
+  height: 80px;
+  background: red;
+  position: absolute;
+  bottom: 0px;
+}

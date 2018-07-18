@@ -1,0 +1,86 @@
+/* pages/addAddress/addAddress.wxss */
+
+
+.body {
+  background: #f2f2ef;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.content {
+  width: 100%;
+  margin-top: 10px;
+  background: #fff;
+}
+
+.accountList {
+  height: 50px;
+  margin: 0 15px;
+  border-bottom: 1px solid #e5e5e5;
+  /* line-height: 50px; */
+}
+
+.accountList view {
+  float: left;
+  font-size: 16px;
+  color: #444;
+  line-height: 50px;
+}
+
+.accountList .accountNameIn {
+  float: right;
+  margin-top: 10px;
+}
+
+.accountList .accountNameIn input {
+  text-align: right;
+  width: 260px;
+}
+.accountList .accountNameIn textarea {
+  text-align: right;
+  height:150px;
+background: #fff;
+  width: 260px;
+  line-height: 20px;
+}
+.accountListaddress{
+  height: 160px;
+}
+.isdefaultImage{
+  width: 17px;
+  float: left;
+
+  height: 17px;
+  margin: 12px 6px 0 15px;
+}
+.defaultText{
+  float: left;font-size: 13px;
+color: #888888;
+margin-top: 14px;
+}
+.isdefaultImage image{
+  width: 100%;
+  height: 100%;
+}
+.modification,.delete{
+  clear: both;
+  width: 345px;
+  text-align: center;
+  line-height: 45px;
+  color: #000;
+  font-size: 16px;
+  height: 45px;
+background: #fff;
+border-radius: 7px;
+  margin: 0 auto;
+}
+.modification{
+  color: #fff;
+  
+  margin-top: 50px;
+  margin-bottom: 15px;
+  background: #FA7635;
+}

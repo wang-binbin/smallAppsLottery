@@ -1,0 +1,44 @@
+<!--pages/home/home.wxml-->
+<view class='body'>
+<view class='head'>
+  <view class='welfare'>通证福利</view>
+  <view class='share'>
+  <button open-type="share" class='shareBtn'></button>
+    <view class='shareText'>分享给朋友</view>
+    <view class='shareIcon'>
+      <image src='../../images/share.png'></image>
+    </view>
+  </view>
+</view>
+<view class='content'>
+  <view class='contentList' wx:for="{{list}}" wx:key="index" data-id='{{item.giftCard.id}}' bindtap='particulars'>
+    <view class='contentHead'>
+      <view class='labelLeft'>
+        <view class='labelText'>{{item.giftCard.type=='0000'?"抽奖":item.giftCard.type}}</view>
+      </view>
+      <view class='leabelRight'>{{item.giftCard.sponsor}}</view>
+      <image class='userBack' src='{{item.giftCard.picPath==null?"../../images/default.png":item.giftCard.picPath}}'></image>
+    </view>
+    <view class='prize'>奖品:{{item.giftCard.name}}×{{item.giftCard.amount}}份</view>
+    <view class='lotteryData'>
+      <view class='participation' wx:if="{{item.isParticipated=='true'}}">
+        <view>
+          <image src='../../images/participation.png'></image>
+        </view>
+        <view class='participationY'>已参与</view>
+        <view class='vertical'>|</view>
+      </view>
+      <view class='date'>{{item.giftCard.awardTime}}</view>
+      <view class='lotteryWay'>自动开奖</view>
+    </view>
+    <view class='dividing'></view>
+  </view>
+
+</view>
+<view class='foot'>
+<view class='trunSponsor' bindtap='trunSponsor'>
+成为赞助商
+</view>
+</view>
+
+</view>

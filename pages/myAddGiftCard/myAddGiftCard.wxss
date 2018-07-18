@@ -1,0 +1,203 @@
+/* pages/myAddGiftCard/myAddGiftCard.wxss */
+
+.swiper-tab {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: #fff;
+  text-align: center;
+  line-height: 80rpx;
+  border-top: 1px solid #f2f2ef;
+}
+
+.swiper-tab-bott {
+  position: absolute;
+  height: 8rpx;
+  border-radius: 50rpx;
+  width: 70rpx;
+  background: #fa7635;
+  bottom: 0;
+  left: 36%;
+}
+
+.swiper-tab-list {
+  font-size: 32rpx;
+  position: relative;
+  display: inline-block;
+  width: 33.33%;
+  color: #7a7a7a;
+}
+
+.helpfixed {
+  clear: both;
+  height: 80rpx;
+  width: 100%;
+}
+
+.on {
+  color: #fa7635;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+
+.head {
+  height: 51px;
+  width: 100%;
+  background: #f2f2ef;
+  line-height: 51px;
+}
+
+.share {
+  float: right;
+  font-size: 14px;
+  line-height: 51px;
+  color: #8a8a8a;
+  position: relative;
+}
+
+.welfare {
+  float: left;
+  color: #fa7635;
+  font-size: 18px;
+  margin-left: 15px;
+}
+
+.share view {
+  float: left;
+  height: 51px;
+}
+
+.shareIcon image {
+  margin: 18px 15px 0 8px;
+  width: 14px;
+  height: 15px;
+}
+
+.content {
+  clear: both;
+}
+
+.contentList {
+  width: 100%;
+  height: 268px;
+  position: relative;
+}
+
+.dividing {
+  clear: both;
+  height: 10px;
+  width: 100%;
+  background: #f2f2ef;
+  position: absolute;
+  bottom: 0;
+}
+
+.labelLeft {
+  float: left;
+  position: absolute;
+  background-size: cover;
+  height: 30px;
+  width: 58px;
+}
+
+.labelText {
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  width: 48px;
+  font-size: 13px;
+}
+
+.contentHead {
+  height: 180px;
+  position: relative;
+}
+
+.userBack {
+  height: 100%;
+  width: 100%;
+}
+
+.leabelRight {
+  float: right;
+  right: 10px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.50);
+  border-radius: 10px;
+  width: 90px;
+  height: 28px;
+  color: white;
+  margin-top: 10px;
+  text-align: center;
+  line-height: 28px;
+  font-size: 13px;
+  /* margin-right: 10px; */
+}
+
+.prize {
+  color: #444;
+  font-size: 17px;
+  background: #fff;
+  line-height: 50px;
+  padding-left: 15px;
+}
+
+.lotteryData {
+  padding-left: 15px;
+  height: 30px;
+  background: #fff;
+}
+
+.lotteryData view {
+  float: left;
+  font-size: 13px;
+  color: #939393;
+}
+
+.lotteryWay {
+  margin-left: 7px;
+}
+
+.participation image {
+  width: 12.5px;
+  height: 12.5px;
+}
+
+.lotteryData .participationY {
+  font-size: 13px;
+  margin-left: 3px;
+  color: #53ad21;
+}
+
+.lotteryData  .vertical {
+  margin: 0 5px;
+  height: 15px;
+  overflow: hidden;
+  color: #c3c3c3;
+}
+
+.trunSponsor {
+  font-size: 14px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  background: #f2f2ef;
+  color: #787878;
+}
+
+.tuceng {
+  width: 50px;
+  height: 80px;
+  background: red;
+  position: absolute;
+  bottom: 0px;
+}
+.lotteryData .miss{
+color: #A1A1A1;
+}
+.lotteryData .win{
+color: #FA7635;
+}
+

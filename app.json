@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/myAddGiftCard/myAddGiftCard",
+    "pages/winUserInfo/winUserInfo",
+    "pages/compileAddress/compileAddress",
+    "pages/addAddress/addAddress",
+    "pages/myGiftCard/myGiftCard",
+    "pages/walletAddressList/walletAddressList",
+    "pages/producePhoto/producePhoto",
+    "pages/giftParticulars/giftParticulars",
+    "pages/add/add",
+    "pages/particulars/particulars",
+    "pages/sponsor/sponsor",
+    "pages/user/user",
+    "pages/skip/skip"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "礼品卡大厅",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#a0a0a0",
+    "selectedColor": "#fa7635",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "selectedIconPath": "images/homeSe.png",
+        "iconPath": "images/home.png",
+        "pagePath": "pages/home/home",
+        "text": "礼品卡大厅"
+      },
+      {
+        "selectedIconPath": "images/addSe.png",
+        "iconPath": "images/add.png",
+        "pagePath": "pages/skip/skip",
+        "text": "生成礼品卡"
+      },
+      {
+        "selectedIconPath": "images/userSe.png",
+        "iconPath": "images/user.png",
+        "pagePath": "pages/user/user",
+        "text": "我的"
+      }
+    ]
+  }
+}

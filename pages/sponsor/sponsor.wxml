@@ -1,0 +1,13 @@
+<!--pages/sponsor/sponsor.wxml-->
+<view class='head'>
+  <view class='content'>
+    <view class='headTxt'>礼品卡支持品牌宣传与奖品合作，由Maggie发起，企业付费冠名。</view>
+    <view class='footTxt'>我们正在寻求优质的企业级合作伙伴，如有商务合作意向，请扫描下方二维码添加我们的商务咨询。
+    </view>
+  </view>
+  <view class='foot'>
+  <view class='logo'>
+  <image src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/maggie.png' bindtap='preview'></image></view>
+  <view class='logoTxt' bindlongpress='copy'>商务微信号: maggiekf01(长按复制)</view>
+  </view>
+</view>

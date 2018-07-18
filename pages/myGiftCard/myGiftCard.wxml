@@ -1,0 +1,28 @@
+<!--pages/myGiftCard/myGiftCard.wxml-->
+<view class='body'>
+  <view class='await'>
+    <view class='awaitTitle'>待开奖</view>
+
+    <view class='awaitLst' data-id='{{item.id}}' wx:for="{{list}}" wx:key="index" bindtap='particulars'>
+      <view class='name'>奖品:{{item.name}}×{{item.amount}}份</view>
+      <view class='logo'>
+        <image src='../../images/rig.png'></image>
+      </view>
+      <view class='date'>{{item.awardTime}}</view>
+    </view>
+  </view>
+
+  <view class='awaitTitle'>已开奖</view>
+
+  <view class='awaitLst' data-id='{{item.id}}' wx:for="{{listOpen}}" wx:key="index" bindtap='particulars'>
+    <view class='name'>奖品:{{item.name}}×{{item.amount}}份</view>
+    <view class='logo'>
+      <image src='../../images/rig.png'></image>
+    </view>
+    <view class='date'>{{item.awardTime}}</view>
+  </view>
+
+
+
+
+</view>

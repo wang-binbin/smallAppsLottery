@@ -1,0 +1,25 @@
+<!--pages/walletAddressList/walletAddressList.wxml-->
+<view class='body'>
+  <view class='addAddrName' bindtap='addAddrName'>新增钱包地址<image class='addAddrNameImg' src='../../images/rig.png'></image>
+  </view>
+  <view class='content'>
+
+    <view class='walletAddressList' wx:for="{{list}}" wx:key="index">
+    <view class='list' bindtap='isdefault' data-index='{{index}}'>
+    <view wx:if="{{select}}">
+    <image  src='../../images/isdefault.png' wx:if='{{item.isdefault}}'></image>
+    <image   src='../../images/nodefault.png' wx:else='{{item.isdefault}}'></image></view>
+    </view>
+      <view class='listText'>{{item.accountName}}</view>
+      <view class='listContent' >
+        <!-- <view class='default' wx:if='{{item.isDefault=="true"}}'>默认</view> -->
+        <view class='address'>{{item.address}}</view>
+        <view class='compile' data-addressId='{{item}}' bindtap='compileAddress'>编辑</view>
+      </view>
+
+    </view>
+
+
+  </view>
+<view class='bottom' bindtap='confirm' wx:if="{{select}}">确定</view>
+</view>

@@ -1,0 +1,21 @@
+<!--pages/addAddress/addAddress.wxml-->
+<view class='body'>
+  <view class='content'>
+    <view class='accountList'>
+      <view class='accountName'>钱包名称</view>
+      <view class='accountNameIn'>
+        <input  bindinput="accountName" placeholder='请输入钱包名称'></input>
+      </view>
+    </view>
+    <view class='accountList accountListaddress'>
+      <view class='accountName'>钱包地址</view>
+      <view class='accountNameIn'>
+        <!-- <input bindinput="address"></input> -->
+        <textarea bindinput="address"  placeholder='请输入钱包地址' maxlength='-1' />
+      </view>
+    </view>
+
+  </view>
+
+  <view class='modification' bindtap='modification'>添加</view>
+</view>

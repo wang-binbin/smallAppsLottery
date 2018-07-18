@@ -1,0 +1,33 @@
+/* pages/myGiftCard/myGiftCard.wxss */
+.awaitTitle{
+  font-size: 13px;
+color: #959595;
+margin: 20px 0 12px 15px; 
+}
+.awaitLst view{
+  float: left;
+}
+.awaitLst{
+background: #fff;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 15px; 
+  margin-top: 10px;
+}
+.logo image{
+  width: 6px;
+  height: 12px;
+}
+.name{
+  font-size: 15px;
+color: #444444;
+}
+.awaitLst .date{
+  float: right;
+  margin-right: 10px;
+  font-size: 13px;
+color: #838383;
+}
+.awaitLst .logo{
+  float: right;
+}
