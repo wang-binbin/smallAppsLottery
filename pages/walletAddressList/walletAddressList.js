@@ -47,7 +47,7 @@ Page({
     common.req({
       url: 'user/updateGiftAddress',
       data: {
-        'giftId': that.data.giftId,
+        'giftId': parseInt(that.data.giftId),
         "address": that.data.addressid
       },
       header: {

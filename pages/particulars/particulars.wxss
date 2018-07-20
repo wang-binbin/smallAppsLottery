@@ -117,7 +117,10 @@
   height: 60px;
   line-height: 60px;
 }
-
+.introduceTxt{
+  width: 100%;
+  color: #444;
+}
 .sponsor1 {
   margin-top: 10px;
 }
@@ -157,14 +160,14 @@
 .introduce view {
   font-size: 15px;
   color: #131313;
-  margin-left: 15px;
+   /* margin-left: 15px; 
   margin-bottom: 23px;
-  margin-right: 15px;
+   margin-right: 15px; */
 }
 
 .introduce .introduceHead {
   color: #444;
-  margin: 15px;
+padding: 15px;
 }
 
 .foot {

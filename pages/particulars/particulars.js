@@ -48,7 +48,7 @@ Page({
     common.req({
       url: 'user/participate',
       data: {
-        'giftId': e.detail.target.dataset.id,
+        'giftId': parseInt(e.detail.target.dataset.id),
         'msgFormId': e.detail.formId
       },
       header: {
@@ -74,7 +74,7 @@ Page({
             'item.isParticipated': 'true',
             'item.participantCount': (parseInt(that.data.item.participantCount) + 1)
           })
-            console.log(that.data.item)
+            
         }
       }
     })
@@ -87,6 +87,7 @@ Page({
     that.setData({
       options: options
     })
+    console.log(options)
 
     if (options.pageId) {
       that.setData({
@@ -162,14 +163,14 @@ Page({
     if (options.giftId) {
       getList(options.giftId)
     } else if (options.scene) {
-      getList(scene.id)
+      getList(scene)
     }
 
     function getList(id) {
       common.req({
         url: 'gift/getGiftDetail',
         data: {
-          'giftId': id
+          'giftId': parseInt(id)
         },
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -177,6 +178,7 @@ Page({
         dataType: 'json',
         method: 'POST',
         success: function (res) {
+          console.log(res)
           let str = res.data.data.giftCard.awardTime;
           str = str.replace(/-/g, '/');
           let date = new Date(str);
@@ -255,7 +257,7 @@ Page({
    */
   onShareAppMessage: function () {//分享页面
     var that = this
-    console.log(that.data.item)
+   
     return {
       title: that.data.userInfo.nickName + '准备了' + that.data.item.giftCard.amount + '份' + that.data.item.giftCard.name + '的礼品卡，大家快来抢。',
       path: '/pages/particulars/particulars?giftId=' + that.data.item.giftCard.id 

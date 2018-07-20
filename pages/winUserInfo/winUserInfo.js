@@ -38,7 +38,7 @@ Page({
     })
     common.req({
       url: 'gift/getWinnerInfo',
-      data: { 'giftId': options.giftId },
+      data: { 'giftId': parseInt(options.giftId) },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },

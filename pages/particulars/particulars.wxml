@@ -6,7 +6,7 @@
         <view class='labelLeft'>
           <view class='labelText'>{{item.giftCard.type=='0000'?"抽奖":item.giftCard.type}}</view>
         </view>
-        <view class='leabelRight' wx:if='{{item.giftCard.sponsor!=""?false:item.giftCard.sponsor!=null?false:""}}'>{{item.giftCard.sponsor}}</view>
+        <view class='leabelRight' wx:if='{{item.giftCard.sponsor==""?false:item.giftCard.sponsor==null?false:item.giftCard.sponsor!=null?true:item.giftCard.sponsor!=""?true:""}}'>{{item.giftCard.sponsor}}</view>
         <image class='userBack' src='{{item.giftCard.picPath==null?"../../images/default.png":item.giftCard.picPath}}'></image>
       </view>
       <view class='prize'>奖品:{{item.giftCard.name}}×{{item.giftCard.amount}}份</view>
@@ -32,9 +32,11 @@
         </view>
       </view>
       <view class='dividing'></view>
-      <view class='introduce' wx:if="{{item.vip=='true'}}">
+      <view class='introduce' style='background:#fff;' wx:if="{{item.giftCard.level=='1000'}}">
         <view class='introduceHead'>奖品介绍：</view>
-        <view class='introduceTxt'>{{item.introduceTxt}}</view>
+        <view style='padding:15px'>
+        <text style='width:100%;' class='introduceTxt'>{{item.giftCard.introduction}}</text> 
+        </view>
       </view>
       <view class='foot'>
         <view class='footPadding' wx:if="{{item.isParticipated=='false'&&item.giftCard.status=='0000'}}">

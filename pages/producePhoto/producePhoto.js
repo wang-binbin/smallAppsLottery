@@ -26,8 +26,9 @@ Page({
       title: '保存中...',
     })
     var that = this;
+    setTimeout(function(){
     wx.saveImageToPhotosAlbum({
-      filePath: tempFilePath.tempFilePath,
+      filePath: that.data.shareImgPath,
       //保存成功失败之后，都要隐藏画板，否则影响界面显示。
       success: (res) => {
         // console.log(res)
@@ -37,6 +38,7 @@ Page({
         wx.hideLoading()
       }
     })
+    }, 500)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -76,6 +78,7 @@ Page({
         }
       }
     })
+    console.log(options.smallProgramCodePath)
     wx.downloadFile({ 
       url: app.FILE_URL + options.smallProgramCodePath,
       success: function (res) {//如果有小程序吗就下载
@@ -83,7 +86,7 @@ Page({
           that.setData({
             smallProgramCodePath: res.tempFilePath
           })
-        } else if (res.statusCode === 404) {//没有用默认的
+        } else{//没有用默认的
           wx.downloadFile({ 
             url: 'https://giftcard-test.maggie.vip/giftCard/cover/2018-07-18-11/ogCeW5DhUTKOvEDYEwx9M5eOahfQ/1531885203309.jpg',
             success: function(res) {
@@ -191,7 +194,7 @@ Page({
       context.clip(); 
       context.drawImage(avatarUrl, avatarurl_x, avatarurl_y, avatarurl_width, avatarurl_heigth);
       context.draw(false, function() {
-        wx.canvasToTempFilePath({//将图片保存在手机
+        wx.canvasToTempFilePath({//将图片绘制
           x: 0,
           y: 0,
           width: unit * 375,
@@ -201,8 +204,7 @@ Page({
           quality: 1,
           canvasId: 'share',
           success: function(res) {
-            // console.log(res)
-            tempFilePath = res;
+          
             that.setData({
               shareImgPath: res.tempFilePath
             })
