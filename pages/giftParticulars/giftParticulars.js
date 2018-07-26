@@ -16,15 +16,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
     var that = this
-
     let awardTime = setDate()
-
     options.picPath = app.FILE_URL + options.picPath
-
     options.awardTime = awardTime
-
     that.setData({
       item: options,
     })
@@ -67,8 +62,9 @@ Page({
   },
   producePhoto: function() {
     var that = this
+    // console.log(that.data.item.giftId)
     wx.navigateTo({
-      url: '../producePhoto/producePhoto?awardTime=' + that.data.item.awardTime + '&id=' + that.data.item.id + '&picPath=' + that.data.item.picPath + '&name=' + that.data.item.name + '&smallProgramCodePath=' + that.data.item.smallProgramCodePath + '&amount=' + that.data.item.amount, 
+      url: '../producePhoto/producePhoto?giftId=' + that.data.item.giftId
     })
   },
   /**
@@ -123,10 +119,18 @@ Page({
 
   onShareAppMessage: function() {
     let that = this
-    console.log(that.data.item)
+
+    try {
+      var value = wx.getStorageSync('userId')
+      if (value) {
+        app.globalData.userId = value
+      }
+    } catch (e) {
+
+    }
     return {
-      title: app.globalData.userInfo.nickName + '准备了' + that.data.item.amount + '份' + that.data.item.name + '的礼品卡，大家快来抢。',
-      path: '/pages/particulars/particulars?giftId=' + that.data.item.giftId 
+      title: that.data.item.nickName + '准备了' + that.data.item.amount + '份' + that.data.item.name + '的礼品卡，大家快来抢。',
+      path: '/pages/particulars/particulars?giftId=' + that.data.item.giftId + "&invitorId=" + (app.globalData.userId || '')
     }
   }
 

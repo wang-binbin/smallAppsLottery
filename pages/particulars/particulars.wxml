@@ -35,16 +35,18 @@
       <view class='introduce' style='background:#fff;' wx:if="{{item.giftCard.level=='1000'}}">
         <view class='introduceHead'>奖品介绍：</view>
         <view style='padding:15px'>
-        <text style='width:100%;' class='introduceTxt'>{{item.giftCard.introduction}}</text> 
+          <text style='width:100%;' class='introduceTxt'>{{item.giftCard.introduction}}</text>
         </view>
       </view>
       <view class='foot'>
-        <view class='footPadding' wx:if="{{item.isParticipated=='false'&&item.giftCard.status=='0000'}}">
-          <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true' >
-            <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+
+        <view class='footPadding'   wx:if="{{item.isParticipated=='false'&&item.giftCard.status=='0000'}}" >
+          <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+          <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true'>
+
             <view class='participationY participation' data-id='{{item.giftCard.id}}' bindtap='participationY'>{{item.isParticipated=='false'?'参与抽奖':item.isParticipated}}
             </view>
-             <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}'>Submit</button>
+            <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}' disabled='{{lock}}'></button>
           </form>
         </view>
         <view class='footPadding' wx:if="{{item.isParticipated=='true'&&item.giftCard.status=='0000'}}">
@@ -99,7 +101,7 @@
         <button open-type="share" class='shareBtn'></button>
       </view>
       <view class='bottomRight' wx:if="{{pageId=='0'}}" bindtap='backHome'>回到首页</view>
-      <view class='bottomRight' wx:else="{{pageId=='1'}}" bindtap='initiate'>我也要发起抽奖</view>
+      <view class='bottomRight' wx:else="{{pageId=='1'}}" bindtap='initiate'>生成分享图片</view>
 
     </view>
   </view>

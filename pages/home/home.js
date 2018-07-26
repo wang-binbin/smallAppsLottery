@@ -38,14 +38,28 @@ Page({
    */
   data: {
     list: [],
+    hidden:false
   },
   trunSponsor: function() { //前往成为赞助商页面
     wx.navigateTo({
       url: '../sponsor/sponsor'
     })
   },
+  shareIcon:function(){//显示提问框
+let that=this
+that.setData({
+  hidden:true
+})
 
-  particulars: function(e) { //查看详情
+  },
+  mCloseImg: function () {//隐藏提问框
+    let that = this
+    that.setData({
+      hidden: false
+    })
+
+  },
+  particulars: function (e) { //查看详情
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '../particulars/particulars?giftId=' + id +"&pageId=0"
@@ -57,6 +71,9 @@ Page({
   onLoad: function(options) {
     let that = this
     var id = options.id
+    app.globalData.invitorId = options.invitorId
+    console.log(options)
+
     common.req({
       url: 'getHomeGiftList',
       data: '',
@@ -66,7 +83,7 @@ Page({
       dataType: 'json',
       method: 'POST',
       success: function(res) {
-        console.log(res.data)
+  
         if(res.data.status=='1001'){
           wx.showToast({
             title: res.data.msg,
@@ -79,7 +96,7 @@ Page({
           str = str.replace(/-/g, '/');
           let date = new Date(str);
           let awardTime = setDate(date)
-          console.log(res.data.data[i].giftCard.picPath)
+        
           res.data.data[i].giftCard.awardTime = awardTime,
             res.data.data[i].giftCard.picPath = app.FILE_URL + res.data.data[i].giftCard.picPath
         }
@@ -173,7 +190,7 @@ Page({
             str = str.replace(/-/g, '/');
             let date = new Date(str);
             let awardTime = setDate(date)
-            console.log(res.data.data[i].giftCard.picPath)
+        
             res.data.data[i].giftCard.awardTime= awardTime,
                 res.data.data[i].giftCard.picPath = app.FILE_URL + res.data.data[i].giftCard.picPath
           }
@@ -196,9 +213,23 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+    let that=this
+    that.setData({
+      hidden: false
+    })
+    try {
+      var value = wx.getStorageSync('userId')
+      if (value) {
+        app.globalData.userId = value
+      }
+    } catch (e) {
+     
+    }
+    console.log(app.globalData.userId)
     return {
       title: '这里有很多通证礼品卡，要不来试试？',
-      path: '/pages/home/home'
+      path: '/pages/home/home?invitorId=' + (app.globalData.userId || '')
     }
+
   }
 })

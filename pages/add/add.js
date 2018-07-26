@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    lock: false,
     byte: false,
     bytenumber: false,
     newDate: false,
@@ -29,7 +30,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     if (e.detail.errMsg == 'getUserInfo:ok') {
@@ -41,7 +42,7 @@ Page({
 
     }
   },
-  inputchange: function(event) { //输入奖品名称时判断字节
+  inputchange: function (event) { //输入奖品名称时判断字节
     var that = this;
     var str = event.detail.value;
     var bytes = new Array();
@@ -80,29 +81,19 @@ Page({
       name: event.detail.value.replace(/\s+/g, '')
     })
   },
-  numberchange: function(event) { //输入数量判断
+  numberchange: function (event) { //输入数量判断
     var that = this;
-    // var length = event.detail.value;
-    // if (length == '999') {
-    //   that.setData({
-    //     bytenumber: true
-    //   })
-    // } else {
-    //   that.setData({
-    //     bytenumber: false
-    //   })
-    // }
     that.setData({
       amount: event.detail.value.replace(/\s+/g, '')
     })
   },
-  cehngePhoto: function() {
+  cehngePhoto: function () {
     var that = this;
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function(res) {
+      success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePath = res.tempFilePaths[0]
         common.req({
@@ -113,7 +104,7 @@ Page({
           },
           dataType: 'json',
           method: 'POST',
-          success: function(uploadGiftCardCoverRes) {
+          success: function (uploadGiftCardCoverRes) {
             console.log(uploadGiftCardCoverRes)
             var filename = new Date().getTime() + util.getSuffix(tempFilePath);
             var formdata = {};
@@ -133,7 +124,7 @@ Page({
               filePath: tempFilePath,
               name: 'file',
               formData: formdata,
-              success: function(uploadFileRes) {
+              success: function (uploadFileRes) {
                 console.log(uploadFileRes)
               },
             })
@@ -145,11 +136,14 @@ Page({
       }
     })
   },
-  establish: function() {
 
-  },
-  formSubmit: function(e) {
+  formSubmit: function (e) {
     let that = this
+    that.setData({
+      lock: true
+    })
+    
+
     let date = new Date();
     let hour = date.getHours() //计算小时数
     let minute = date.getMinutes() //计算分数
@@ -215,12 +209,19 @@ Page({
           },
           dataType: 'json',
           method: 'POST',
-          success: function(res) {
-            console.log(res)
+          success: function (res) {
+            common.uploadInfo(that.data.userInfo.nickName, that.data.userInfo.avatarUrl)
             wx.reLaunch({
-              url: '../giftParticulars/giftParticulars?awardTime=' + res.data.data.awardTime + '&giftId=' + res.data.data.id + '&picPath=' + res.data.data.picPath + '&name=' + res.data.data.name + '&smallProgramCodePath=' + res.data.data.smallProgramCodePath + '&amount=' + res.data.data.amount,
+              url: '../giftParticulars/giftParticulars?awardTime=' + res.data.data.awardTime + '&giftId=' + res.data.data.id + '&picPath=' + res.data.data.picPath + '&name=' + res.data.data.name + '&smallProgramCodePath=' + res.data.data.smallProgramCodePath + '&amount=' + res.data.data.amount + '&nickName=' + that.data.userInfo.nickName,
             })
           },
+
+          complete: function (res) {
+            that.setData({
+              lock: false
+            })
+          },
+
         })
       } else {
         wx.showToast({
@@ -236,11 +237,12 @@ Page({
         duration: 2000
       })
     }
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var that = this;
     wx.setNavigationBarTitle({
       title: '生成礼品卡'
@@ -286,13 +288,13 @@ Page({
     })
 
   },
-  bindPickerChange: function(e) {//时间选择器
-   
+  bindPickerChange: function (e) { //时间选择器
+
     this.setData({
       index: e.detail.value
     })
   },
-  bindMultiPickerChange: function(e) {
+  bindMultiPickerChange: function (e) {
     var that = this;
     let date = new Date();
     let hour = date.getHours() //计算小时数
@@ -335,7 +337,7 @@ Page({
       multiIndex: e.detail.value
     })
   },
-  bindMultiPickerColumnChange: function(e) {
+  bindMultiPickerColumnChange: function (e) {
     var data = {
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
@@ -348,13 +350,13 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     if (app.globalData.userInfo) { //在app页面获取userInfo
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-      common.uploadInfo(app.globalData.userInfo.nickName, app.globalData.userInfo.avatarUrl)
+
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -363,7 +365,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        common.uploadInfo(res.userInfo.nickName, res.userInfo.avatarUrl)
+
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -374,7 +376,7 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
-          common.uploadInfo(res.userInfo.nickName, res.userInfo.avatarUrl)
+
         }
       })
     }
@@ -383,21 +385,21 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     var pages = getCurrentPages();
     var prevPage = pages[pages.length - 2]; //上一个页面
 
@@ -413,14 +415,14 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     wx.stopPullDownRefresh() //停止下拉刷新
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 

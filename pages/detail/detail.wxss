@@ -1,0 +1,41 @@
+/* pages/detail/detail.wxss */
+page{
+  background: #f2f2ef;
+}
+.padding{
+  height: 10px;
+}
+.left{
+  margin-top: 12px;
+  float: left;
+}
+.detailList{
+  position: relative;
+  background: #fff;
+  height: 70px;
+  padding: 0 15px;
+
+}
+
+.border{
+  position: absolute;
+  width: 345px;
+  margin: 0 auto;
+  bottom: 0;
+  height: 1px;
+  background: #D8D8D8;
+}
+.time{font-size: 13px;
+color: #A2A2A2;
+margin-top: 6px;}
+
+.type{
+  font-size: 16px;
+color: #2E2E2E;
+}
+.right{
+  font-size: 17px;
+  line-height: 70px;
+color: #53AD21;
+  float: right;
+}

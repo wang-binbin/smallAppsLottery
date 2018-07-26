@@ -28,15 +28,15 @@
         <image src='../../images/rig.png'></image>
       </view>
     </view>
-    <!-- <view class='myBalance'>
+     <view class='myBalance' bindtap='myBalance'>
       <view class='myLogo'>
         <image src='../../images/myBalance.png'></image>
       </view>
-      <view class='myText'>我的通证余额</view>
+      <view class='myText'>我的余额</view>
       <view class='myRig'>
         <image src='../../images/rig.png'></image>
       </view>
-    </view> -->
+    </view> 
   </view>
   <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 </view>

@@ -55,7 +55,7 @@
   <view class='bottom' bindtap='establish'>
    <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true' >
     生成礼品卡
-          <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}'>Submit</button>
+          <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}' disabled='{{lock}}'>Submit</button>
           </form>
   </view>
   <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> 

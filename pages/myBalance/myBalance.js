@@ -1,44 +1,30 @@
-// pages/winUserInfo/winUserInfo.js
+// pages/myBalance/myBalance.js
 const app = getApp()
-var util = require("../../utils/util.js");
 var common = require("../../common.js");
+var util = require("../../utils/util.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  list:[],
+  list:[]
   },
-  copy:function(e){//复制
-    wx.setClipboardData({
-      data: e.currentTarget.dataset.copy,
-      success: function (res) {
-        wx.getClipboardData({
-          success: function (res) {
-          },
-          fail:function(){
-            wx.showToast({
-              title: '复制失败！请重试',
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        })
-      }
-    })
+  balanceList:function(e){
+    console.log(e.currentTarget.dataset.id)
+wx:wx.navigateTo({
+  url: '../detail/detail?balanceType=' + e.currentTarget.dataset.id,
+})
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that=this
-    wx.setNavigationBarTitle({
-      title: '获奖者信息'
-    })
     common.req({
-      url: 'gift/getWinnerInfo',
-      data: { 'giftId': parseInt(options.giftId) },
+      url: 'user/getBalance',
+      data: {},
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -46,11 +32,10 @@ Page({
       method: 'POST',
       success: function (res) {
         console.log(res)
+        that.setData({
+          list:res.data.data
+        })
 
-      that.setData({
-        list: res.data.data
-      })
-      console.log(res.data.data)
       },
     })
   },
@@ -87,7 +72,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh() //停止下拉刷新
+  
   },
 
   /**
@@ -100,7 +85,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
+  onShareAppMessage: function () {
   
-  // }
+  }
 })

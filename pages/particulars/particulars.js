@@ -8,12 +8,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    lock: false,
     item: {},
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     pageId: 0,
-    options: '',
+    options: null,
   },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
@@ -32,8 +33,9 @@ Page({
   },
 
   initiate: function () { //发起抽奖
+    let that = this
     wx.navigateTo({
-      url: '../add/add'
+      url: '../producePhoto/producePhoto?giftId=' + that.data.item.giftCard.id
     })
 
   },
@@ -43,8 +45,9 @@ Page({
 
     })
   },
-  formSubmit: function (e) {//获取formId并参与
+  formSubmit: function (e) { //获取formId并参与
     let that = this
+    common.uploadInfo(that.data.userInfo.nickName, that.data.userInfo.avatarUrl)
     common.req({
       url: 'user/participate',
       data: {
@@ -58,14 +61,14 @@ Page({
       method: 'POST',
       success: function (res) {
         if (res.data.status == '0000') {
-          
-          let firstUrl = that.data.item.participantList//参与成功，，替换首个头像
-          if (that.data.item.participantList.length<=0){
+
+          let firstUrl = that.data.item.participantList //参与成功，，替换首个头像
+          if (that.data.item.participantList.length <= 0) {
             firstUrl.unshift(that.data.userInfo.avatarUrl)
-          } else if (that.data.item.participantList.length == 8){
+          } else if (that.data.item.participantList.length == 8) {
             firstUrl.splice(7, 1)
             firstUrl.unshift(that.data.userInfo.avatarUrl)
-          } else if (0<that.data.item.participantList.lengt<8){
+          } else if (0 < that.data.item.participantList.lengt < 8) {
             firstUrl.unshift(that.data.userInfo.avatarUrl)
           }
 
@@ -74,7 +77,7 @@ Page({
             'item.isParticipated': 'true',
             'item.participantCount': (parseInt(that.data.item.participantCount) + 1)
           })
-            
+
         }
       }
     })
@@ -84,20 +87,53 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    app.globalData.invitorId = options.invitorId
+    console.log(options)
     that.setData({
       options: options
     })
-    console.log(options)
-
     if (options.pageId) {
       that.setData({
         pageId: 1
       })
     }
 
+
+    if (app.globalData.userInfo) { //在app页面获取userInfo
+      that.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+
+
+    } else if (that.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+
+      app.userInfoReadyCallback = res => {
+        that.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          that.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+
+        }
+      })
+    }
     wx.setNavigationBarTitle({
       title: '礼品卡详情'
     })
+
 
   },
   select: function () {
@@ -112,43 +148,8 @@ Page({
    */
 
   onReady: function () {
-    let that=this
-    if (app.globalData.userInfo) { //在app页面获取userInfo
-      that.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-      common.uploadInfo(app.globalData.userInfo.nickName, app.globalData.userInfo.avatarUrl)
+    let that = this
 
-    } else if (that.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-
-        that.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-
-        common.uploadInfo(res.userInfo.nickName, res.userInfo.avatarUrl)
-
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      
-      wx.getUserInfo({
-        success: res => {
-          console.log(res)
-          app.globalData.userInfo = res.userInfo
-          that.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-          common.uploadInfo(res.userInfo.nickName, res.userInfo.avatarUrl)
-
-        }
-      })
-    }
 
   },
 
@@ -156,10 +157,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
     let that = this
+
+
     let options = that.data.options
-    var scene = decodeURIComponent(options.scene)
+    let scene = decodeURIComponent(options.scene)
     if (options.giftId) {
       getList(options.giftId)
     } else if (options.scene) {
@@ -167,6 +170,9 @@ Page({
     }
 
     function getList(id) {
+      that.setData({
+        lock: true
+      })
       common.req({
         url: 'gift/getGiftDetail',
         data: {
@@ -178,7 +184,6 @@ Page({
         dataType: 'json',
         method: 'POST',
         success: function (res) {
-          console.log(res)
           let str = res.data.data.giftCard.awardTime;
           str = str.replace(/-/g, '/');
           let date = new Date(str);
@@ -190,10 +195,15 @@ Page({
           })
 
         },
+        complete: function (res) {
+          that.setData({
+            lock: false
+          })
+        },
       })
     }
 
-    function setDate(date) {//将时间转化格式
+    function setDate(date) { //将时间转化格式
       let getHours, getMinutes, getMonth, getDate;
 
       if (date.getMonth() < 9) {
@@ -255,12 +265,21 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {//分享页面
+  onShareAppMessage: function () { //分享页面
+
+    try {
+      var value = wx.getStorageSync('userId')
+      if (value) {
+        app.globalData.userId = value
+      }
+    } catch (e) {
+
+    }
+
     var that = this
-   
     return {
-      title: that.data.userInfo.nickName + '准备了' + that.data.item.giftCard.amount + '份' + that.data.item.giftCard.name + '的礼品卡，大家快来抢。',
-      path: '/pages/particulars/particulars?giftId=' + that.data.item.giftCard.id 
+      title: that.data.item.createrInfo.nickName + '准备了' + that.data.item.giftCard.amount + '份' + that.data.item.giftCard.name + '的礼品卡，大家快来抢。',
+      path: '/pages/particulars/particulars?giftId=' + that.data.item.giftCard.id + "&invitorId=" + (app.globalData.userId || '')
     }
   }
 })

@@ -1,6 +1,10 @@
 {
   "pages": [
+   
     "pages/home/home",
+    "pages/detail/detail",
+    "pages/particulars/particulars",
+    "pages/myBalance/myBalance",
     "pages/myAddGiftCard/myAddGiftCard",
     "pages/winUserInfo/winUserInfo",
     "pages/compileAddress/compileAddress",
@@ -10,7 +14,7 @@
     "pages/producePhoto/producePhoto",
     "pages/giftParticulars/giftParticulars",
     "pages/add/add",
-    "pages/particulars/particulars",
+    
     "pages/sponsor/sponsor",
     "pages/user/user",
     "pages/skip/skip"

@@ -25,12 +25,24 @@ function updateUserInfo() {
 }
 
 function reLogin(options) {
+  // if (app.state.loginLock){
+  //   while(true){
+  //     // sleep(100);
+  //     if (!app.state.loginLock){
+  //       req(options);
+  //       break;
+  //     }
+  //   }
+  // }
+  app.state.loginLock = true;
   wx.login({ // 登录
     success: loginRes => {
+      console.log(app.globalData.invitorId)
       req({
         url: 'user/login',
         data: {
-          'jsCode': loginRes.code
+          'jsCode': loginRes.code,
+          "invitorId": app.globalData.invitorId || ''
         },
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -39,12 +51,22 @@ function reLogin(options) {
         success: function(serviceLoginRes) {
           console.log(serviceLoginRes.header['Set-Cookie'])
           if (serviceLoginRes.data.status == '0000') {
+            if (app.globalData.userId!=null){
+            }else{
+            wx.setStorage({
+              key: "userId",
+              data: serviceLoginRes.data.data.userId
+              })
+            }
             try {
-              wx.setStorageSync('cookie', serviceLoginRes.header["Set-Cookie"])
+              if (serviceLoginRes.header["Set-Cookie"]){
+                wx.setStorageSync('cookie', serviceLoginRes.header["Set-Cookie"])
+              }
+              
             } catch (e) {
               console.error(e)
             }
-
+            app.state.loginLock = false;
             req(options);
           } else {
             wx.showToast({
@@ -55,6 +77,9 @@ function reLogin(options) {
           }
         }
       })
+    },
+    fail:res=>{
+      app.state.loginLock = false;
     }
   })
 }
@@ -62,6 +87,7 @@ function reLogin(options) {
 function req(options) {
   wx.getStorage({
     key: 'cookie',
+
     complete: function(res) {
       // console.log(res)
       if (options.header && options.header != "") {
@@ -89,7 +115,15 @@ function req(options) {
           options.url = oldUrl;
           reLogin(options)
         } else {
+          if (res.data.status!='0000'){
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 2000
+            })
+          }
           oldSuccess(res);
+          
         }
       }
 
@@ -100,6 +134,7 @@ function req(options) {
 }
 
 function uploadInfo(nickName, avatarUrl) {
+  if (nickName != null && avatarUrl != null && avatarUrl != '' && nickName != ''){
   req({
     url: 'user/updateUserInfo',
     data: {
@@ -112,8 +147,9 @@ function uploadInfo(nickName, avatarUrl) {
     dataType: 'json',
     method: 'POST',
     success: function(res) {
-
+      console.log(res)
     },
 
   })
+  }
 }

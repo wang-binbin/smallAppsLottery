@@ -71,11 +71,11 @@
 }
 
 .myGift, .myAddGift, .myBalance {
-  clear: both;
+   clear: both; 
   height: 51px;
   font-size: 14px;
   color: #181818;
-  margin: 0 15px;
+   margin: 0 15px; 
   border-bottom: 1px solid #e5e5e5;
 }
 
@@ -84,7 +84,8 @@
 }
 
 .myLogo {
-  line-height: 57px;
+  /* line-height: 51px; */
+   margin-top: 12px; 
 }
 
 .myText {
@@ -93,7 +94,7 @@
 
 .content .myRig {
   float: right;
-  line-height: 57px;
+  line-height: 51px;
 }
 
 .content .myRig  image {
@@ -103,9 +104,10 @@
 }
 
 .myLogo image {
+  margin-top: 3px;
   margin-right: 16px;
-  width: 18px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
 }
 .myBalance{
   border: none;

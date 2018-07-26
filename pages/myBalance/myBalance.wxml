@@ -1,0 +1,15 @@
+<!--pages/myBalance/myBalance.wxml-->
+<!-- wx:for='{{list}}' -->
+<view class='balanceList'  bindtap='balanceList' data-id='{{list.id}}'>
+  <view class='currencyLogo'>
+    <image src='../../images/mag.png'></image>
+  </view>
+  <view class='contentTxt'>
+    <view class='nameTxt'>MAG</view>
+    <view class='number'>{{list.balance}}
+      <e class='kind'>mag
+      </e>
+    </view>
+  </view>
+  <view class='rig'><image src='../../images/rig.png'></image></view>
+</view>

@@ -1,0 +1,12 @@
+<!--pages/detail/detail.wxml-->
+<view class='padding'></view>
+<view class='detailList' wx:for='{{list}}'>
+  <view class='left'>
+    <view class='type'>邀请奖励</view>
+    <view class='time'>{{item.createTime}}</view>
+  </view>
+  <view class='right'>
+  +5.00
+  </view>
+  <view class='border'></view>
+</view>

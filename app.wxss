@@ -8,15 +8,7 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
-.shareBtn{
-width: 100%;
-height: 100%;
-position: absolute;
-left: 0;
-top: 0;
-z-index: 2;
-opacity:0;
-}
+
 .body {
   background: #f2f2ef;
   height: 100%;

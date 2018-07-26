@@ -49,9 +49,114 @@ Page({
       title: '生成分享图片'
     })
     var that = this
-    that.setData({
-      item: options,
-    })
+    console.log(options)
+      that.setData({
+        lock: true
+      })
+      common.req({
+        url: 'gift/getGiftDetail',
+        data: {
+          'giftId':options.giftId
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: function (res) {
+          let str = res.data.data.giftCard.awardTime;
+          str = str.replace(/-/g, '/');
+          let date = new Date(str);
+          let awardTime = setDate(date)
+          res.data.data.giftCard.awardTime = awardTime,
+            res.data.data.giftCard.picPath = app.FILE_URL + res.data.data.giftCard.picPath
+          that.setData({
+            item: res.data.data
+          })
+          wx.downloadFile({ //把图片下载下来
+            url: that.data.item.giftCard.picPath,
+            success: function (res) {
+              if (res.statusCode === 200) {
+                that.setData({
+                  giftPhoto: res.tempFilePath
+                })
+              }
+            }
+          })
+
+          wx.downloadFile({
+            url: app.FILE_URL + that.data.item.giftCard.smallProgramCodePath,
+            success: function (res) {//如果有小程序吗就下载
+              if (res.statusCode === 200) {
+                that.setData({
+                  smallProgramCodePath: res.tempFilePath
+                })
+              } else {//没有用默认的
+                wx.downloadFile({
+                  url: 'https://giftcard-test.maggie.vip/giftCard/cover/2018-07-18-11/ogCeW5DhUTKOvEDYEwx9M5eOahfQ/1531885203309.jpg',
+                  success: function (res) {
+                    if (res.statusCode === 200) {
+                      that.setData({
+                        smallProgramCodePath: res.tempFilePath
+                      })
+                    }
+                  }
+                })
+              }
+
+            },
+            fail: function (res) {
+              console.log(res)
+            }
+          })
+          wx.downloadFile({ //把图片下载下来
+            url: that.data.userInfo.avatarUrl,
+            success: function (res) {
+              if (res.statusCode === 200) {
+                that.setData({
+                  avatarUrl: res.tempFilePath
+                })
+              }
+            }
+          })
+        },
+        complete: function (res) {
+          that.setData({
+            lock: false
+          })
+        },
+      })
+    
+
+    function setDate(date) { //将时间转化格式
+      let getHours, getMinutes, getMonth, getDate;
+
+      if (date.getMonth() < 9) {
+        getMonth = '0' + (parseInt(date.getMonth()) + 1)
+      } else {
+        getMonth = date.getMonth()
+      }
+      if (date.getDate() < 10) {
+        getDate = '0' + date.getDate()
+      } else {
+        getDate = date.getDate()
+      }
+
+      if (date.getHours() < 10) {
+        getHours = '0' + date.getHours()
+      } else {
+        getHours = date.getHours()
+      }
+      if (date.getMinutes() < 10) {
+        getMinutes = '0' + date.getMinutes()
+      } else {
+        getMinutes = date.getMinutes()
+      }
+      let newData = getMonth + "月" + getDate + "日 " + getHours + ":" + getMinutes
+      return newData;
+
+    }
+   
     wx.showLoading({
       title: '图片绘制中',
     })
@@ -68,52 +173,8 @@ Page({
         })
       }
     })
-    wx.downloadFile({ //把图片下载下来
-      url: options.picPath,
-      success: function(res) {
-        if (res.statusCode === 200) {
-          that.setData({
-            giftPhoto: res.tempFilePath
-          })
-        }
-      }
-    })
-    console.log(options.smallProgramCodePath)
-    wx.downloadFile({ 
-      url: app.FILE_URL + options.smallProgramCodePath,
-      success: function (res) {//如果有小程序吗就下载
-        if (res.statusCode === 200) {
-          that.setData({
-            smallProgramCodePath: res.tempFilePath
-          })
-        } else{//没有用默认的
-          wx.downloadFile({ 
-            url: 'https://giftcard-test.maggie.vip/giftCard/cover/2018-07-18-11/ogCeW5DhUTKOvEDYEwx9M5eOahfQ/1531885203309.jpg',
-            success: function(res) {
-              if (res.statusCode === 200) {
-                that.setData({
-                  smallProgramCodePath: res.tempFilePath
-                })
-              }
-            }
-          })
-        }
-
-      },
-      fail: function(res) {
-        console.log(res)
-      }
-    })
-    wx.downloadFile({ //把图片下载下来
-      url: that.data.userInfo.avatarUrl,
-      success: function(res) { 
-        if (res.statusCode === 200) {
-          that.setData({
-            avatarUrl: res.tempFilePath
-          })
-        }
-      }
-    })
+  
+  
 
 
   },
@@ -123,9 +184,10 @@ Page({
    */
   onReady: function() {
     var that = this
+    
     var count = 0;
     var interval = setInterval(function() {
-      console.log(that.data.smallProgramCodePath)
+
       if (!(that.data.screenWidth && that.data.giftPhoto && that.data.avatarUrl && that.data.smallProgramCodePath) && ++count < 5) {//检测图片是否下载完成
         return;
       } else {//完成清除计时器
@@ -153,8 +215,8 @@ Page({
       var avatarurl_y = 34; //绘制的头像在画布上的位置
       var nickName = that.data.userInfo.nickName
       var nickName1 = '发送了一张礼品卡';
-      var prize = '奖品:' + that.data.item.name + '×' + that.data.item.amount + "份"
-      var prizeIfon = that.data.item.awardTime + '  自动开奖'
+      var prize = '奖品:' + that.data.item.giftCard.name + '×' + that.data.item.giftCard.amount + "份"
+      var prizeIfon = that.data.item.giftCard.awardTime + '  自动开奖'
       var context = wx.createCanvasContext('share')
       context.save();
       var description = that.data.description
