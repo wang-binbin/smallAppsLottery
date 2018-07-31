@@ -1,0 +1,11 @@
+<!--pages/flaunt/flaunt.wxml-->
+
+<view class='body'>
+
+  <canvas canvas-id='share' style='' hidden='{{canvasHidden}}'></canvas>
+
+
+</view>
+<view hidden="{{save}}" class='save' bindtap='saveImageToPhotosAlbum'>
+  保存图片
+</view>

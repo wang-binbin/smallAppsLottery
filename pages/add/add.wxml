@@ -1,28 +1,27 @@
-
 <!--pages/add/add.wxml-->
 
 <view class='body'>
-<view class='content'>
-  <!--头部复用  -->
-  <view class='contentList'>
-    <view class='contentHead'>
-      <view class='labelLeft'>
-        <!-- <view class='labelText'>{{item.Type}}</view> -->
+  <view class='content'>
+    <!--头部复用  -->
+    <view class='contentList'>
+      <view class='contentHead'>
+        <view class='labelLeft'>
+          <!-- <view class='labelText'>{{item.Type}}</view> -->
+        </view>
+        <view class='leabelRight' bindtap='cehngePhoto'>更换奖品图片</view>
+        <image class='userBack' src='{{src}}'></image>
       </view>
-      <view class='leabelRight' bindtap='cehngePhoto'>更换奖品图片</view>
-      <image class='userBack' src='{{src}}'></image>
     </view>
   </view>
-</view>
 
   <view class='head'>
     <view class='prizeName'>
       <view class='prizeNameOne'>
         <view class=''>奖品名称</view>
         <view class="section">
-          <input type="text" bindinput='inputchange' value='{{name}}' placeholder="请输入奖品名称，如1000mag" maxlength='24' placeholder-style='font-size: 15px;color: #B7B7B7;' />
+          <input type="text" bindinput='inputchange' value='{{name}}' placeholder="请输入奖品名称，如1000mag" maxlength='20' placeholder-style='font-size: 15px;color: #B7B7B7;' />
         </view>
-        <view class='warning' wx:if='{{byte}}' >不能超过24个字符、8个字</view>
+        <view class='warning' wx:if='{{byte}}'>不能超过20个字符</view>
       </view>
 
     </view>
@@ -30,9 +29,9 @@
       <view class=''>奖品数量</view>
       <view class='part'>份</view>
       <view class="num">
-        <input type="number" placeholder="数量不得超过999" value='{{amount}}' bindinput='numberchange'  maxlength='3' placeholder-style='font-size: 15px;color: #B7B7B7;' />
+        <input type="number" placeholder="数量不得超过999" value='{{amount}}' bindinput='numberchange' maxlength='3' placeholder-style='font-size: 15px;color: #B7B7B7;' />
       </view>
-<view class='warning' wx:if='{{bytenumber}}'>数量不得超过   999</view>
+      <view class='warning' wx:if='{{bytenumber}}'>数量不得超过 999</view>
     </view>
   </view>
 
@@ -50,13 +49,30 @@
       </view>
       <view class='warning' wx:if='{{newDate}}'>开奖时间不得低于现在时间</view>
     </view>
+  </view>
+  <view class='foot'>
+    <view class='LotteryStyle'></view>
+    <view class='LotteryStart '>
+      <view class='starttime'>领奖方式</view>
+      <view class="section__title">
+        <picker bindchange="bindPickerChange" value="{{wayOfGiving}}" range="{{array}}">
+          <view class="picker" style='text-align:right'>
+            {{array[wayOfGiving]}}
+            <image class='rightpicker' style='margin-right:15px;' src='../../images/rig.png'></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
 
+  <view class='LotteryStart' wx:if='{{WechatAccept}}'>
+  <input type="text" bindinput='Wechat' value='{{Wechat}}' placeholder="请输入客服微信号码" maxlength='24' placeholder-style='font-size: 15px;color: #B7B7B7;' />
   </view>
   <view class='bottom' bindtap='establish'>
-   <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true' >
-    生成礼品卡
-          <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}' disabled='{{lock}}'>Submit</button>
-          </form>
+    <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true'>
+      生成礼品卡
+      <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}' disabled='{{lock}}'>Submit</button>
+    </form>
   </view>
-  <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> 
+  <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 </view>

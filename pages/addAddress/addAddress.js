@@ -7,49 +7,98 @@ Page({
    * 页面的初始数据
    */
   data: {
-    accountName: '',
-    address: ''
+    addressToken: null,
+    name: null,
+    moble: null,
+    addressHome: null,
+    wayOfGiving:null,
+    giftId:null
   },
-  accountName: function(e) {
+
+  addressToken: function(e) {
     let that = this
-    var val = e.detail.value;
+   
     that.setData({
-      accountName: val
+      addressToken: e.detail.value
     });
   },
-  address: function(e) {
+  name: function (e) {
     let that = this
-    var val = e.detail.value;
+   
     that.setData({
-      address: val
+      name: e.detail.value
     });
   },
+  moble: function (e) {
+    let that = this
+   
+    that.setData({
+      moble: e.detail.value
+    });
+  },
+  addressHome: function (e) {
+    let that = this
+   
+    that.setData({
+      addressHome: e.detail.value
+    });
+  },
+
   modification: function() {
     let that = this
-    if (that.data.accountName != '' && that.data.address != '') {
+
+    if (that.data.wayOfGiving==1){
+      if (that.data.addressToken != null && that.data.addressToken != '') {
+        address(that.data.addressToken)
+        
+      } else {
+        wx.showToast({
+          title: '不能为空！',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    } else if (that.data.wayOfGiving == 2) {
+      if (that.data.name != null && that.data.name != '' && that.data.moble != null && that.data.moble != '' && that.data.addressHome != null && that.data.addressHome != '') {
+        address(that.data.name + '|' + that.data.moble + '|' + that.data.addressHome)
+        
+      } else {
+        wx.showToast({
+          title: '不能为空！',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    } else if (that.data.wayOfGiving == 3) {
+
+      if (that.data.moble != null && that.data.moble != '') {
+        address(that.data.moble)
+        
+      } else {
+        wx.showToast({
+          title: '不能为空！',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    }
+
+    function address(address){
       common.req({
-        url: 'user/createAccount',
+        url: 'user/updateGiftAddress',
         data: {
-          "accountName": that.data.accountName,
-          "address": that.data.address
+          "giftId": that.data.giftId,
+          "address": address
         },
 
         method: 'post',
-        success: function(res) {
-
+        success: function (res) {
           if (res.data.status == '0000') {
             wx.navigateBack({
               delta: 1
             })
           }
         },
-      })
-
-    } else {
-      wx.showToast({
-        title: '不能为空！',
-        icon: 'none',
-        duration: 2000
       })
     }
   },
@@ -58,8 +107,14 @@ Page({
    */
   onLoad: function(options) {
     var that = this
+    console.log(options)
+    that.setData({
+      wayOfGiving: options.wayOfGiving,
+      giftId: options.giftId
+
+    })
     wx.setNavigationBarTitle({
-      title: '我的钱包地址'
+      title: '填写领奖信息'
     })
 
 

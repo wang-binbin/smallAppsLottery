@@ -41,8 +41,7 @@ App({
   },
   
   REQ_URL: 'https://service.maggie.vip/giftcard/api/',
-  FILE_URL :"https://giftcard-prod-bucket.maggie.vip/",
-// FILE_URL :'https://maggie-public.oss-cn-beijing.aliyuncs.com/',
+  FILE_URL: "https://giftcard-prod-bucket.maggie.vip/",
   globalData: {
     userInfo: null,
     appId: null,

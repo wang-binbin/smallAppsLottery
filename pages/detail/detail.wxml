@@ -1,6 +1,6 @@
 <!--pages/detail/detail.wxml-->
 <view class='padding'></view>
-<view class='detailList' wx:for='{{list}}'>
+<view class='detailList' wx:for='{{list}}' wx:key="index">
   <view class='left'>
     <view class='type'>邀请奖励</view>
     <view class='time'>{{item.createTime}}</view>

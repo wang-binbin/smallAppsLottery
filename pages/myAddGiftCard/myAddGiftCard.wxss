@@ -136,7 +136,9 @@
   /* margin-right: 10px; */
 }
 
-.prize {
+.prize {overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
   color: #444;
   font-size: 17px;
   background: #fff;

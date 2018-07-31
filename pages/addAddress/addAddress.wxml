@@ -1,21 +1,45 @@
 <!--pages/addAddress/addAddress.wxml-->
 <view class='body'>
-  <view class='content'>
-    <view class='accountList'>
+  <view class='content' wx:if='{{wayOfGiving==1}}'>
+    <!-- <view class='accountList'>
       <view class='accountName'>钱包名称</view>
       <view class='accountNameIn'>
-        <input  bindinput="accountName" placeholder='请输入钱包名称'></input>
+        <input bindinput="accountName" placeholder='请输入钱包名称'></input>
       </view>
-    </view>
+    </view> -->
     <view class='accountList accountListaddress'>
       <view class='accountName'>钱包地址</view>
       <view class='accountNameIn'>
         <!-- <input bindinput="address"></input> -->
-        <textarea bindinput="address"  placeholder='请输入钱包地址' maxlength='-1' />
+        <textarea bindinput="addressToken" placeholder='请输入钱包地址' maxlength='-1' />
       </view>
     </view>
 
   </view>
+  <view class='content'>
+  
+    <view class='accountList' wx:if='{{wayOfGiving==2}}'>
+      <view class='accountName'>名字</view>
+      <view class='accountNameIn'>
+        <input bindinput="name" placeholder='请输入名字'></input>
+      </view>
+    </view>
+
+    <view class='accountList' wx:if='{{wayOfGiving==2||wayOfGiving==3}}'>
+      <view class='accountName'>手机号码</view>
+      <view class='accountNameIn'>
+        <input bindinput="moble" placeholder='请输入手机号码'></input>
+      </view>
+    </view>
+
+        <view class='accountList' wx:if='{{wayOfGiving==2}}'>
+      <view class='accountName'>详细地址</view>
+      <view class='accountNameIn'>
+        <input bindinput="addressHome" placeholder='请输入详细地址'></input>
+      </view>
+    </view>
+  </view>
+
 
   <view class='modification' bindtap='modification'>添加</view>
 </view>

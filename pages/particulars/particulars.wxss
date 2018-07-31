@@ -83,6 +83,10 @@ opacity:0;
   font-size: 17px;
   line-height: 50px;
   padding-left: 15px;
+  overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+
 }
 
 .lotteryData {
@@ -226,7 +230,11 @@ padding: 15px;
   color: #848484;
   margin-bottom: 18px;
 }
-
+.photo{
+  line-height: 33px;
+  color: #9F9F9F;
+font-size: 15px;
+}
 .photo image {
   width: 33px;
   height: 33px;
@@ -260,7 +268,9 @@ padding: 15px;
 .bottomLeft {
   position: relative;
 }
-
+.bottom .flaunt{
+  background: #d4237a;
+}
 .userinfo {
   width: 111px;
   height: 111px;
@@ -337,6 +347,9 @@ padding: 15px;
   text-align: center;
   margin-top: 30px;
   padding-bottom: 30px;
+  overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
 }
 
 .addAddress {
@@ -378,11 +391,17 @@ padding: 15px;
 }
 
 .modificationAddress {
-  margin-top: 5px;
+  margin-top: 8px;
   font-size: 11px;
   color: #a1a1a1;
 }
 
 .hasAddAddress {
-  padding-bottom: 12px;
+  padding-bottom: 26px;
+}
+.hidden{
+  font-size: 15px;
+  text-align: center;
+ margin-bottom: 20px;
+color: #939393;
 }

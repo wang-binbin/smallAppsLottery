@@ -9,6 +9,7 @@ Page({
    */
   data: {
   list:[],
+  wayOfGiving:null
   },
   copy:function(e){//复制
     wx.setClipboardData({
@@ -33,12 +34,16 @@ Page({
    */
   onLoad: function (options) {
     let that=this
+    console.log(options)
+    that.setData({
+      wayOfGiving: options.wayOfGiving
+    })
     wx.setNavigationBarTitle({
       title: '获奖者信息'
     })
     common.req({
       url: 'gift/getWinnerInfo',
-      data: { 'giftId': parseInt(options.giftId) },
+      data: { 'giftId': parseInt(options.giftId)},
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },

@@ -14,7 +14,7 @@
 }
 
 .userNickName {
-  width: 240px;
+  width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 55px;
@@ -33,12 +33,11 @@
 
 .address {
   clear: both;
-  height: 32px;
-  width: 345px;
-  background: #efefef;
-  border-radius: 5px;
-  margin: 0 auto;
-  margin-top: 6px;
+border-top: 1px #E5E5E5 solid;
+  line-height: 44px;
+  margin: 0 15px;
+  font-size: 13px;
+color: #7C7C7C;
 }
 .noWrite{
   font-size: 12px;
@@ -51,17 +50,22 @@ margin-right: 15px;
   height: 1px;
   width: 100%;
 }
+.wayOfGiving{
+  float: left;
 
-.addressTxt {
-  font-size: 11px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 320px;
-  margin: 0 auto;
-  color: #878787;
-  line-height: 32px;
 }
+.addressTxt{
+float: right;
+font-size: 11px;
+width: 260px;
+text-align: right;
+/* /* overflow: hidden; */
+/* text-overflow:ellipsis; */
+/* white-space: nowrap;  */
+word-wrap:break-word;
+color: #878787;
+}
+
 .paddingbottom{
   height: 20px;
   background: #fff;

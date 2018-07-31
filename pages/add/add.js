@@ -9,9 +9,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    array: ['钱包地址领奖', '收货地址领奖', '手机号领奖', '添加官方微信领奖'],
     lock: false,
+    wayOfGiving: 0,
+    WechatAccept: false,
     byte: false,
     bytenumber: false,
+    Wechat: null,
     newDate: false,
     pickDate: '',
     name: '',
@@ -42,41 +46,48 @@ Page({
 
     }
   },
+  Wechat: function (event) {
+    let that = this;
+    that.setData({
+      Wechat: event.detail.value
+    })
+
+  },
   inputchange: function (event) { //输入奖品名称时判断字节
     var that = this;
-    var str = event.detail.value;
-    var bytes = new Array();
-    var len, c;
-    len = str.length;
-    for (var i = 0; i < len; i++) {
-      c = str.charCodeAt(i);
-      if (c >= 0x010000 && c <= 0x10FFFF) {
-        bytes.push(((c >> 18) & 0x07) | 0xF0);
-        bytes.push(((c >> 12) & 0x3F) | 0x80);
-        bytes.push(((c >> 6) & 0x3F) | 0x80);
-        bytes.push((c & 0x3F) | 0x80);
-      } else if (c >= 0x000800 && c <= 0x00FFFF) {
-        bytes.push(((c >> 12) & 0x0F) | 0xE0);
-        bytes.push(((c >> 6) & 0x3F) | 0x80);
-        bytes.push((c & 0x3F) | 0x80);
-      } else if (c >= 0x000080 && c <= 0x0007FF) {
-        bytes.push(((c >> 6) & 0x1F) | 0xC0);
-        bytes.push((c & 0x3F) | 0x80);
-      } else {
-        bytes.push(c & 0xFF);
-      }
-      if (bytes.length >= 24) {
+    // var str = event.detail.value;
+    // var bytes = new Array();
+    // var len, c;
+    // len = str.length;
+    // for (var i = 0; i < len; i++) {
+    //   c = str.charCodeAt(i);
+    //   if (c >= 0x010000 && c <= 0x10FFFF) {
+    //     bytes.push(((c >> 18) & 0x07) | 0xF0);
+    //     bytes.push(((c >> 12) & 0x3F) | 0x80);
+    //     bytes.push(((c >> 6) & 0x3F) | 0x80);
+    //     bytes.push((c & 0x3F) | 0x80);
+    //   } else if (c >= 0x000800 && c <= 0x00FFFF) {
+    //     bytes.push(((c >> 12) & 0x0F) | 0xE0);
+    //     bytes.push(((c >> 6) & 0x3F) | 0x80);
+    //     bytes.push((c & 0x3F) | 0x80);
+    //   } else if (c >= 0x000080 && c <= 0x0007FF) {
+    //     bytes.push(((c >> 6) & 0x1F) | 0xC0);
+    //     bytes.push((c & 0x3F) | 0x80);
+    //   } else {
+    //     bytes.push(c & 0xFF);
+    //   }
+    if (event.detail.value.length >= 20) {
 
         that.setData({
           byte: true
         })
-      } else if (bytes.length < 24) {
+    } else if (event.detail.value.length < 20) {
 
         that.setData({
           byte: false
         })
       }
-    }
+    // }
     that.setData({
       name: event.detail.value.replace(/\s+/g, '')
     })
@@ -142,8 +153,17 @@ Page({
     that.setData({
       lock: true
     })
-    
-
+    if (that.data.wayOfGiving ==3&&that.data.Wechat==null){
+      wx.showToast({
+        title: '请填写客服微信号',
+        icon: 'none',
+        duration: 2000
+      })
+      that.setData({
+        lock: false
+      })
+      return
+}
     let date = new Date();
     let hour = date.getHours() //计算小时数
     let minute = date.getMinutes() //计算分数
@@ -203,6 +223,8 @@ Page({
             "sponsor": '',
             "introduction": '',
             "msgFormId": e.detail.formId,
+            "wayOfGiving": parseInt(that.data.wayOfGiving) + 1,
+            "awardWechat": that.data.Wechat
           },
           header: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -224,6 +246,9 @@ Page({
 
         })
       } else {
+        that.setData({
+          lock: false
+        })
         wx.showToast({
           title: '请检查开奖时间',
           icon: 'none',
@@ -231,6 +256,9 @@ Page({
         })
       }
     } else {
+      that.setData({
+        lock: false
+      })
       wx.showToast({
         title: '奖品名称或数量不符合标准!',
         icon: 'none',
@@ -288,11 +316,23 @@ Page({
     })
 
   },
-  bindPickerChange: function (e) { //时间选择器
-
-    this.setData({
-      index: e.detail.value
+  bindPickerChange: function (e) { 
+    let that = this
+    console.log(e.detail.value)
+    if (e.detail.value == 3) {
+      that.setData({
+        WechatAccept: true
+      })
+    } else {
+      that.setData({
+        WechatAccept: false,
+        Wechat:null
+      })
+    }
+    that.setData({
+      wayOfGiving: e.detail.value
     })
+
   },
   bindMultiPickerChange: function (e) {
     var that = this;

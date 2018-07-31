@@ -11,10 +11,33 @@ Page({
     lock: false,
     item: {},
     userInfo: {},
+    hidden:true,
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     pageId: 0,
     options: null,
+  },
+  hidden:function(){
+let that=this
+that.setData({
+  hidden: !that.data.hidden
+})
+  },
+  flaunt:function(){
+    let that=this
+wx:wx.navigateTo({
+  url: '../flaunt/flaunt?giftId=' + that.data.item.giftCard.id,
+
+})
+  },
+  coypHidden:function(){
+    let that=this
+    wx.setClipboardData({
+      data: that.data.item.address,
+      success: function (res) {
+console.log(res)
+      }
+    })
   },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
@@ -40,8 +63,9 @@ Page({
 
   },
   winUserInfo: function (e) { //查看中将则信息
+    let that = this
     wx: wx.navigateTo({
-      url: '../winUserInfo/winUserInfo?giftId=' + e.currentTarget.dataset.id
+      url: '../winUserInfo/winUserInfo?giftId=' + e.currentTarget.dataset.id + "&wayOfGiving=" + that.data.item.giftCard.wayOfGiving
 
     })
   },
@@ -138,8 +162,17 @@ Page({
   },
   select: function () {
     let that = this
+    if (that.data.item.giftCard.wayOfGiving==4){
+      wx.setClipboardData({
+        data: that.data.item.giftCard.awardWechat,
+        success: function (res) {
+          console.log(res)
+        }
+      })
+return
+    }
     wx: wx.navigateTo({
-      url: '../walletAddressList/walletAddressList?select=true&giftId=' + that.data.item.giftCard.id,
+      url: '../addAddress/addAddress?giftId=' + that.data.item.giftCard.id + "&wayOfGiving=" + that.data.item.giftCard.wayOfGiving,
 
     })
   },
@@ -169,6 +202,7 @@ Page({
       getList(scene)
     }
 
+    // getList(443)
     function getList(id) {
       that.setData({
         lock: true
@@ -190,6 +224,11 @@ Page({
           let awardTime = setDate(date)
           res.data.data.giftCard.awardTime = awardTime,
             res.data.data.giftCard.picPath = app.FILE_URL + res.data.data.giftCard.picPath
+          if (res.data.data.participantCount > 8) {
+            that.setData({
+              beyond: '...'
+            })
+          }
           that.setData({
             item: res.data.data
           })

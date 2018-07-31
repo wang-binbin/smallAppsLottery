@@ -1,4 +1,5 @@
 <!--pages/winUserInfo/winUserInfo.wxml-->
+
 <view class='body'>
   <view class='content'>
     <view class='winUser' wx:for="{{list}}" wx:key="index" data-id='{{item.id}}'>
@@ -8,26 +9,23 @@
       </view>
       <view class='userNickName'>{{item.nickName}}
       </view>
-      <view class='noWrite' wx:if='{{item.address==null}}'>未填写
+    <view class='noWrite' wx:if='{{wayOfGiving==4}}'>领奖码：{{item.address}}
       </view>
       <view class='padding'></view>
-      <view class='address' wx:if='{{item.address!=null}}' bindlongtap='copy' data-copy='{{item.address}}'>
-        <view class='addressTxt'>{{item.address}}</view>
+      <!-- wx:if='{{item.address!=null}}' -->
+      <view class='address' bindlongtap='copy' data-copy='{{item.address}}'>
+
+        <view class='wayOfGiving'>{{wayOfGiving==1?'钱包地址':wayOfGiving==2?'收货地址':wayOfGiving==3?'手机号':""}}</view>
+
+        <view class='addressTxt' wx:if='{{wayOfGiving!=4}}'>{{item.address==null?"未填写":item.address}}</view>
+        <view class='clear'></view>
       </view>
-      <view class='paddingbottom' wx:if='{{item.address!=null}}'></view>
+
     </view>
-
-
-
 
   </view>
 
 
-
-
-
-
-
-
-
 </view>
+
+

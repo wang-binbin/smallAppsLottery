@@ -1,4 +1,5 @@
-// pages/producePhoto/producePhoto.js
+// pages/flaunt/flaunt.js
+
 const app = getApp()
 var common = require("../../common.js");
 var tempFilePath;
@@ -49,10 +50,12 @@ Page({
       title: '生成分享图片'
     })
     var that = this
-    console.log(options)
+
     that.setData({
-      lock: true
+      lock: true,
+      userInfo: app.globalData.userInfo
     })
+    // options.giftId
     common.req({
       url: 'gift/getGiftDetail',
       data: {
@@ -64,13 +67,7 @@ Page({
       dataType: 'json',
       method: 'POST',
       success: function (res) {
-        let str = res.data.data.giftCard.awardTime;
-        console.log(str)
-        console.log(str.replace(/-/g, '/'))
-        str = str.replace(/-/g, '/');
-        let date = new Date(str);
-        let awardTime = setDate(date)
-        res.data.data.giftCard.awardTime = awardTime,
+   
           res.data.data.giftCard.picPath = app.FILE_URL + res.data.data.giftCard.picPath
         that.setData({
           item: res.data.data
@@ -84,33 +81,20 @@ Page({
               })
             }
           }
-        })
+        }) 
+       
 
         wx.downloadFile({
-          url: app.FILE_URL + that.data.item.giftCard.smallProgramCodePath,
-          success: function (res) {//如果有小程序吗就下载
+          url: 'https://giftcard-test.maggie.vip/giftCard/cover/2018-07-18-11/ogCeW5DhUTKOvEDYEwx9M5eOahfQ/1531885203309.jpg',
+          success: function (res) {
             if (res.statusCode === 200) {
               that.setData({
                 smallProgramCodePath: res.tempFilePath
               })
-            } else {//没有用默认的
-              wx.downloadFile({
-                url: 'https://giftcard-test.maggie.vip/giftCard/cover/2018-07-18-11/ogCeW5DhUTKOvEDYEwx9M5eOahfQ/1531885203309.jpg',
-                success: function (res) {
-                  if (res.statusCode === 200) {
-                    that.setData({
-                      smallProgramCodePath: res.tempFilePath
-                    })
-                  }
-                }
-              })
             }
-
-          },
-          fail: function (res) {
-            console.log(res)
           }
         })
+       
         wx.downloadFile({ //把图片下载下来
           url: that.data.userInfo.avatarUrl,
           success: function (res) {
@@ -130,41 +114,11 @@ Page({
     })
 
 
-    function setDate(date) { //将时间转化格式
-      let getHours, getMinutes, getMonth, getDate;
-
-      if (date.getMonth() < 9) {
-        getMonth = '0' + (parseInt(date.getMonth()) + 1)
-      } else {
-        getMonth = date.getMonth()
-      }
-      if (date.getDate() < 10) {
-        getDate = '0' + date.getDate()
-      } else {
-        getDate = date.getDate()
-      }
-
-      if (date.getHours() < 10) {
-        getHours = '0' + date.getHours()
-      } else {
-        getHours = date.getHours()
-      }
-      if (date.getMinutes() < 10) {
-        getMinutes = '0' + date.getMinutes()
-      } else {
-        getMinutes = date.getMinutes()
-      }
-      let newData = getMonth + "月" + getDate + "日 " + getHours + ":" + getMinutes
-      return newData;
-
-    }
 
     wx.showLoading({
       title: '图片绘制中',
     })
-    that.setData({
-      userInfo: app.globalData.userInfo
-    })
+   
 
 
     //获取用户设备信息，屏幕宽度
@@ -197,18 +151,18 @@ Page({
       }
       let str;
       if (!(/^[a-zA-Z]*$/.test(that.data.item.giftCard.name))) {
-        if (that.data.item.giftCard.name.length >= 12) {
-          if (!(/^[\u4e00-\u9fa5]*$/.test(that.data.item.giftCard.name.substring(0, 12)))) {
-            str = that.data.item.giftCard.name.substring(0, 12) + '...'
-          } else if (/^[\u4e00-\u9fa5]*$/.test(that.data.item.giftCard.name.substring(0, 12))) {
+        if (that.data.item.giftCard.name.length >= 10) {
+          if (!(/^[\u4e00-\u9fa5]*$/.test(that.data.item.giftCard.name.substring(0, 10)))) {
             str = that.data.item.giftCard.name.substring(0, 10) + '...'
+          } else if (/^[\u4e00-\u9fa5]*$/.test(that.data.item.giftCard.name.substring(0, 10))) {
+            str = that.data.item.giftCard.name.substring(0, 8) + '...'
           }
         } else {
           str = that.data.item.giftCard.name
         }
       } else if (/^[a-zA-Z]*$/.test(that.data.item.giftCard.name)) {
-        if (that.data.item.giftCard.name.length >= 19) {
-          str = that.data.item.giftCard.name.substring(0, 16) + '...'
+        if (that.data.item.giftCard.name.length >= 15) {
+          str = that.data.item.giftCard.name.substring(0, 15) + '...'
         } else {
           str = that.data.item.giftCard.name
         }
@@ -222,26 +176,27 @@ Page({
       if (giftPhoto == null) {
         giftPhoto = ' ../../images/default.png'
       }
-      var avatarUrl = that.data.item.createrInfo.avatarUrl == null ? '../../images/defaultUrl.png' : that.data.item.createrInfo.avatarUrl
+      var avatarUrl = that.data.avatarUrl == null ? '../../images/defaultUrl.png' : that.data.avatarUrl
       //设置画板显示，才能开始绘图
       that.setData({
         canvasHidden: false
       })
+      let num = that.data.item.winnerCount / that.data.item.participantCount
+      let percentage=num.toFixed(2) * 100 + '%'
       var unit = that.data.screenWidth / 375
-      // var unit=1;
       var path1 = "../../images/Group.png" //底部图片
       var avatarurl_width = 50; //绘制的头像宽度
       var avatarurl_heigth = 50; //绘制的头像高度
       var avatarurl_x = unit * 375 / 2 - 25; //绘制的头像在画布上的位置
       var avatarurl_y = 34; //绘制的头像在画布上的位置
-      var nickName = that.data.item.createrInfo.nickName
-      var nickName1 = '发送了一张礼品卡';
-      var prize = '奖品:' + str + '×' + that.data.item.giftCard.amount + "份"
-      var prizeIfon = that.data.item.giftCard.awardTime + '  自动开奖'
+      var nickName = that.data.userInfo.nickName
+      var nickName1 = '我在通证礼品卡中奖了：' + str;
+      // var prize = '奖品:' + that.data.item.giftCard.name + '×' + that.data.item.giftCard.amount + "份"
+      // var prizeIfon = that.data.item.giftCard.awardTime + '  自动开奖'
       var context = wx.createCanvasContext('share')
       context.save();
       var description = that.data.description
-      var wxappName = "长按识别小程序，参与抽奖"
+      var wxappName = "长按识别小程序，来「通证礼品卡 」试试手气"
       context.drawImage(path1, unit * 15, unit * 15, unit * 345, unit * 524)
       context.setFontSize(15) //设置nickname
       context.setFillStyle("#fff")
@@ -259,24 +214,22 @@ Page({
       context.drawImage(giftPhoto, unit * 40, unit * 170, unit * 296, unit * 140)
       context.setFontSize(17) //设置奖品
       context.setFillStyle("#444")
-      
       context.setTextAlign('left')
-      context.fillText(prize, unit * 50, unit * 335)
-      context.setTextAlign('left')
-      context.setFontSize(13) //设置奖品信息
+      context.drawImage('../../images/people.png', unit * 60, unit * 335, unit * 15, unit * 15)
       context.setFillStyle("#939393")
-
-
-      context.setTextAlign('left')
-      context.fillText(prizeIfon, unit * 50, unit * 360)
-      context.setTextAlign('left')
       context.setFontSize(13)
-      context.setFillStyle("#9f9f9f")
-
-      context.setTextAlign('center')
+      context.fillText('参与人数  ' + that.data.item.participantCount, unit * 80, unit * 348,)
+      // context.drawImage('../../images/probability.png', unit * 220, unit * 335, unit * 15, unit * 15)
+      // context.setFillStyle("#939393")
+      // context.setFontSize(13)
+   
+      // context.fillText('中奖率  ' + percentage , unit * 240, unit * 348, )
       context.drawImage(that.data.smallProgramCodePath, unit * (375 - 89) / 2, unit * 390, unit * 89, unit * 89)//小程序吗
+      context.setTextAlign('center')
+      context.setFontSize(13)
       context.fillText(wxappName, unit * 375 / 2, unit * 513)
       context.setFillStyle("#9f9f9f")
+      context.setFontSize(13)
       context.setTextAlign('center')
       context.arc(avatarurl_width / 2 + avatarurl_x, avatarurl_heigth / 2 + avatarurl_y, avatarurl_width / 2, 0, Math.PI * 2, false);//切圆形图
       context.clip();

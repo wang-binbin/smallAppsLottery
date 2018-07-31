@@ -70,6 +70,7 @@ that.setData({
    */
   onLoad: function(options) {
     let that = this
+
     var id = options.id
     app.globalData.invitorId = options.invitorId
     console.log(options)

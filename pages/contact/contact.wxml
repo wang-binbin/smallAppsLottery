@@ -1,0 +1,22 @@
+<!--pages/contact/contact.wxml-->
+<view class='padding'></view>
+
+    <view class='headTxt'><image src='../../images/giftCard.png'></image></view>
+    <view class='giftTxt'>通证礼品卡</view>
+    <view class='title'>
+    <view class='titkeImg'><image src='../../images/titleIcon.png'></image></view>
+    <view class='titkeTxt'>成为赞助商</view>
+    <view class='clear'></view>
+    <view class='contenTxt'>成为赞助商请点击下方按钮添加客服微信，备注赞助商</view>
+    </view>
+     <view class='title'>
+    <view class='titkeImg'><image src='../../images/titleIcon.png'></image></view>
+    <view class='titkeTxt'>客服微信</view>
+    <view class='clear'></view>
+    <view class='QRcode'><image src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/maggie.png'></image></view>
+    </view>
+    <view class='copy' bindlongtap='copy'>
+    <view class='copyCode'>maggiekf01</view>
+    <view class='hint'>长按复制</view>
+    </view>
+

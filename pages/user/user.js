@@ -31,14 +31,19 @@ Page({
       complete: function(res) {},
     })
   },
-  walletAddress: function() { //钱包地址页面
-    wx: wx.navigateTo({
-      url: '../walletAddressList/walletAddressList',
-    })
-  },
+  // walletAddress: function() { //钱包地址页面
+  //   wx: wx.navigateTo({
+  //     url: '../walletAddressList/walletAddressList',
+  //   })
+  // },
   myGiftCard: function() { //我生成的礼品卡
     wx: wx.navigateTo({
       url: '../myGiftCard/myGiftCard',
+    })
+  },
+  contact:function() {//联系我们
+    wx: wx.navigateTo({
+      url: '../contact/contact',
     })
   },
   myBalance:function(){//我的余额

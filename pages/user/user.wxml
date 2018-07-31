@@ -5,9 +5,9 @@
       <image src='{{userInfo.avatarUrl}}'></image>
     </view>
     <view class='nickname'>{{userInfo.nickName}}</view>
-    <view class='walletAddress' bindtap='walletAddress'>钱包地址
+    <!-- <view class='walletAddress' bindtap='walletAddress'>钱包地址
       <image src='../../images/rig.png'></image>
-    </view>
+    </view> -->
   </view>
   <view class='content'>
     <view class='myGift' bindtap='myAddGiftCard'>
@@ -28,7 +28,7 @@
         <image src='../../images/rig.png'></image>
       </view>
     </view>
-     <view class='myBalance' bindtap='myBalance'>
+    <view class='myBalance' bindtap='myBalance'>
       <view class='myLogo'>
         <image src='../../images/myBalance.png'></image>
       </view>
@@ -36,7 +36,17 @@
       <view class='myRig'>
         <image src='../../images/rig.png'></image>
       </view>
-    </view> 
+    </view>
+    <view class='padding'></view>
+     <view class='myBalance' bindtap='contact'>
+      <view class='myLogo'>
+        <image src='../../images/contact.png'></image>
+      </view>
+      <view class='myText'>联系我们</view>
+      <view class='myRig'>
+        <image src='../../images/rig.png'></image>
+      </view>
+    </view>
   </view>
   <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 </view>

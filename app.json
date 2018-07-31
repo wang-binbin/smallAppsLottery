@@ -1,20 +1,21 @@
 {
   "pages": [
-   
+    
     "pages/home/home",
+   "pages/particulars/particulars",
+    "pages/addAddress/addAddress",
+    "pages/add/add",
+    "pages/flaunt/flaunt",
+    "pages/winUserInfo/winUserInfo",
+    "pages/contact/contact",
     "pages/detail/detail",
-    "pages/particulars/particulars",
     "pages/myBalance/myBalance",
     "pages/myAddGiftCard/myAddGiftCard",
-    "pages/winUserInfo/winUserInfo",
     "pages/compileAddress/compileAddress",
-    "pages/addAddress/addAddress",
     "pages/myGiftCard/myGiftCard",
     "pages/walletAddressList/walletAddressList",
     "pages/producePhoto/producePhoto",
     "pages/giftParticulars/giftParticulars",
-    "pages/add/add",
-    
     "pages/sponsor/sponsor",
     "pages/user/user",
     "pages/skip/skip"

@@ -60,16 +60,19 @@
           </view>
           <view class='wonText'>恭喜，您中奖了</view>
           <view class='wonGiftText'>奖品:{{item.giftCard.name}}</view>
-          <!-- <view class='noHasAddAddress' wx:if="{{item.address==null}}">
-            <view class='addAddress'>添加钱包地址</view>
-          </view> -->
-          <!--  -->
+           <view class='hidden' bindtap='hidden' wx:if='{{item.giftCard.wayOfGiving=="4"}}'>
+           <view wx:if='{{hidden}}'>查看领奖码</view>
+          <view wx:else='{{hidden}}' bindlongtap='coypHidden'>{{item.address}}</view>
+          </view>
           <view class='hasAddAddress' bindtap='select'>
             <view class='hasAddress'>
-              <view class='address'>{{(item.address==null||item.address=='')?'请填写钱包地址':item.address}}</view>
-
+              <view class='address' wx:if='{{item.giftCard.wayOfGiving=="1"}}'>{{item.address==null?'请填写钱包地址':item.address}}</view>
+              <view class='address' wx:if='{{item.giftCard.wayOfGiving=="2"}}'>{{item.address==null?'请填写收货地址':item.address}}</view>
+              <view class='address' wx:if='{{item.giftCard.wayOfGiving=="3"}}'>{{item.address==null?'请填手机号':item.address}}</view>
+              <view class='address' wx:if='{{item.giftCard.wayOfGiving=="4"}}'>添加微信:{{item.giftCard.awardWechat}}</view>
             </view>
-            <view class='modificationAddress' wx:if="{{item.address!=null}}" bindtap='select'>(点击修改)</view>
+
+             <view class='modificationAddress'>请在七个工作日内填写收奖信息，否则视为放弃领取奖励</view> 
           </view>
         </view>
 
@@ -93,15 +96,17 @@
         <view class='num' wx:else="{{item.giftCard.status=='1000'}}">中奖者名单</view>
         <view class='photo' wx:if="{{item.giftCard.status=='1000'}}">
           <image wx:for="{{item.winnerList}}" wx:key="index" src='{{item}}'></image>
+         {{beyond}}
         </view>
       </view>
     </view>
     <view class='bottom'>
-      <view class='bottomLeft'>分享给朋友
+      <view class='bottomLeft' wx:if="{{item.isWon=='false'||item.isWon==null}}">分享给朋友
         <button open-type="share" class='shareBtn'></button>
       </view>
-      <view class='bottomRight' wx:if="{{pageId=='0'}}" bindtap='backHome'>回到首页</view>
-      <view class='bottomRight' wx:else="{{pageId=='1'}}" bindtap='initiate'>生成分享图片</view>
+       <view class='flaunt' wx:if="{{item.isWon=='true'}}" bindtap='flaunt'>炫耀一下</view>
+      <view class='bottomRight' wx:if="{{pageId=='0'}}" bindtap='backHome'>查看更多抽奖</view>
+      <view class='bottomRight' wx:if="{{pageId=='1'}}" bindtap='initiate'>生成分享图片</view>
 
     </view>
   </view>

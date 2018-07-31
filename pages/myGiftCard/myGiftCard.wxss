@@ -21,6 +21,10 @@ background: #fff;
 .name{
   font-size: 15px;
 color: #444444;
+width: 200px;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
 }
 .awaitLst .date{
   float: right;
