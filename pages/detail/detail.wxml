@@ -1,12 +1,13 @@
 <!--pages/detail/detail.wxml-->
 <view class='padding'></view>
-<view class='detailList' wx:for='{{list}}' wx:key="index">
+<view class='detailList' wx:for='{{list.content}}' wx:key="index">
   <view class='left'>
-    <view class='type'>邀请奖励</view>
-    <view class='time'>{{item.createTime}}</view>
+    <view class='type'>{{item.actionType=='0000'?'充值':item.actionType=='1000'?'提现':item.actionType=='0100'?'邀请奖励':item.actionType=='0200'?'抢得红包':item.actionType=='0210'?'红包退款':item.actionType=='1100'?'发放红包':''}}</view>
+    <view class='time'>{{item.actionTime}}</view>
   </view>
-  <view class='right'>
-  +5.00
+  <view class='right {{item.amount>0?"red":""}}'>
+   <!-- {{item.amount>0?"+":""}} -->
+ {{item.amount}}{{item.tokenSymbol}}
   </view>
   <view class='border'></view>
 </view>

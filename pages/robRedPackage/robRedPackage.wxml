@@ -1,0 +1,49 @@
+<!--pages/robRedPackage/robRedPackage.wxml-->
+<view class='rob' bindtap='rob' wx:if='{{rob.isParticipated=="false"&&rob.redEnvelope.status=="0000"}}'>
+  <view class='userImg'>
+    <image src='{{rob.createrInfo.avatarUrl}}'></image>
+  </view>
+  <view class='userName'>{{rob.createrInfo.nickName}}</view>
+  <view class='userDes'>赠送了{{rob.redEnvelope.tokenTotal}}{{rob.redEnvelope.tokenSymbol}}的红包卡</view>
+  <view class='message'>{{rob.redEnvelope.message}}</view>
+</view>
+<view class='bady' wx:if='{{rob.isParticipated=="true"||rob.redEnvelope.status!="0000"}}'>
+  <view class='head'>
+    <image class='back' src='../../images/separate.png'></image>
+    <view class='redPackageImg'>
+      <image src='{{rob.createrInfo.avatarUrl}}'></image>
+    </view>
+    <view class='userName'>{{rob.createrInfo.nickName}}</view>
+    <view class='redPackageDes'>赠送了{{rob.redEnvelope.tokenTotal}}{{rob.redEnvelope.tokenSymbol}}的红包卡</view>
+    <view class='redPackagemessage'>{{rob.redEnvelope.message}}</view>
+    <view wx:if='{{rob.isParticipated=="true"}}'>
+      <view class='money'>{{rob.snatchedAmount}}
+        <e class='moneyT'>{{rob.redEnvelope.tokenSymbol}}</e>
+      </view>
+      <view class='cue'>{{rob.redEnvelope.tokenSymbol}}将在10秒内到账，请注意查收</view>
+    </view>
+    <view wx:if='{{rob.isParticipated=="false"}}' class='robOver'>
+    {{rob.redEnvelope.status=='1000'?'红包礼品卡已被领完':rob.redEnvelope.status=='2000'?'红包礼品卡已失效':''}}
+    </view>
+  </view>
+  <view class='surplus'>{{rob.redEnvelope.envelopeNumber}}份礼品卡，还剩{{rob.redEnvelope.envelopeNumber-rob.snatchedNumber}}份</view>
+  <view class='snatchedList'>
+    <view class='robImg' wx:for='{{rob.snatchedList.content}}' wx:key='index'>
+      <image class='robAvatarUrl' src='{{item.avatarUrl}}'></image>
+      <view class='robInfo'>
+        <view class='robnickName'>{{item.nickName}}</view>
+        <view class='robparticipateTime'>{{item.participateTime}}</view>
+      </view>
+      <view class='robRight'>
+        <view class='robAmount'>{{item.amount}}
+          <e style='font-size: 12px;color: #626262;'>{{rob.redEnvelope.tokenSymbol}}</e>
+        </view>
+        <image class='luck' wx:if='{{item.isMax=="true"&&rob.redEnvelope.status!="0000"&&rob.redEnvelope.type=="0000"}}' src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/luck.png'></image>
+      </view>
+      <e class='clear'></e>
+    </view>
+  </view>
+  <image class='continueShear' wx:if='{{rob.redEnvelope.status=="0000"&&user&&!gohome&&rob.isParticipated=="true"}}' src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/continueShear.png' bindtap='shear'></image>
+  <image class='moreToken' bindtap='shear' wx:if='{{gohome&&rob.isParticipated=="true"}}' bindtap='gohome' src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/moreToken.png'></image>
+</view>
+  <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>

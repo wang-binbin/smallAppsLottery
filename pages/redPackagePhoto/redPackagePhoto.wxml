@@ -1,0 +1,19 @@
+<!--pages/redPackagePhoto/redPackagePhoto.wxml-->
+<view class='body'>
+
+  <canvas canvas-id='share' style='' hidden='{{canvasHidden}}'></canvas>
+
+
+</view>
+<view class='bottom'>
+<view hidden="{{save}}" class='share' >
+发送给好友或微信群
+ <button open-type="share" class='shareBtn'></button>
+</view>
+
+<view hidden="{{save}}" class='save' bindtap='saveImageToPhotosAlbum'>
+ <button open-type="openSetting" hidden='{{openSetting}}' class='shareBtn'></button>
+  保存小程序码
+</view>
+
+</view>

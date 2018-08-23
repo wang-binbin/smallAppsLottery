@@ -9,6 +9,63 @@
   top: 0;
 }
 
+.copy{
+  height: 220px;
+  border: 3px solid #E9E9E9;
+border-radius: 5px;
+position: relative;
+margin: 10px 15px;
+}
+.copy .closeImg{
+width: 20px;
+height: 20px;
+position: absolute;
+right: 0px;
+top: 0px;
+padding: 10px;
+}
+.copyTitle{
+  width: 200px;
+  text-align: center;
+  font-size: 15px;
+color: #7C5F51;
+margin: 23px auto;
+}
+.copyCon{
+  margin: 0 33px;
+  height: 75px;
+ background: #F6F6F6;
+border-radius: 5px;
+
+}
+.copyCon view{
+ 
+  margin: 0 auto;
+padding-top: 26px;
+text-align: center;
+  font-size: 15px;
+color: #7C5F51;
+}
+.img{
+  position: relative;
+  margin: 10px 15px;
+}
+.img image{
+width: 100%;
+}
+.copyBtn{
+  margin: 0 auto;
+  margin-top: 17px;
+  
+  width: 180px;
+  height: 40px;
+  background: #7C5F51 ;
+border-radius: 50px;
+text-align: center;
+line-height: 40px;
+font-size: 15px;
+color: #FFFFFF;
+}
 .content {
   clear: both;
 }
@@ -169,7 +226,7 @@ white-space: nowrap;
   margin-bottom: 0;
 }
 
-.introduce view {
+.introduce {
   font-size: 15px;
   color: #131313;
    /* margin-left: 15px; 

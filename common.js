@@ -49,15 +49,15 @@ function reLogin(options) {
         },
         method: 'POST',
         success: function(serviceLoginRes) {
+          console.log(serviceLoginRes)
           console.log(serviceLoginRes.header['Set-Cookie'])
           if (serviceLoginRes.data.status == '0000') {
-            if (app.globalData.userId!=null){
-            }else{
+          
             wx.setStorage({
               key: "userId",
-              data: serviceLoginRes.data.data.userId
+              data: serviceLoginRes.data.data.user.id
               })
-            }
+            
             try {
               if (serviceLoginRes.header["Set-Cookie"]){
                 wx.setStorageSync('cookie', serviceLoginRes.header["Set-Cookie"])

@@ -1,0 +1,49 @@
+/* pages/redPackagePhoto/redPackagePhoto.wxss */
+
+.body {
+  background: #f2f2ef;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+canvas {
+  width: 100vw;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: white;
+  width: 100%;
+  height: 49px;
+  line-height: 49px;
+  color: #5d5d5d;
+  font-size: 15px;
+  text-align: center;
+}
+
+.bottom view {
+  width: 50%;
+position: relative;
+  float: left;
+}
+
+.share {
+    color: #fff;
+  background: #fa7635;
+}
+.shareBtn{
+width: 100%;
+height: 100%;
+position: absolute;
+right: 0;
+top: 0;
+z-index: 2;
+opacity:0;
+}

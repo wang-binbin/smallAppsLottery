@@ -1,0 +1,72 @@
+/* pages/pay/pay.wxss */
+
+
+page{
+background: #F2F2EF;
+}
+.head{
+  margin-top: 10px;
+  background: #fff;
+  height: 175px;
+}
+.list{
+  height: 70px;margin-top: 10px;
+}
+.content{
+  margin-top: 10px;
+    background: #fff;
+    padding: 0 15px;
+
+}
+.title{
+  line-height: 50px;
+  font-size: 16px;
+  text-indent: 1.5em;
+color: #181818;
+}
+.icon{  
+  font-size: 15px;
+color: #565656;
+  margin-left: 20px;
+height: 36px;
+line-height: 36px;
+}
+.time{
+  font-size: 15px;
+color: #181818;
+  margin: 11px 0 7px 0 ;
+}
+.icon image{
+  margin-top: 14px;
+  width: 8px;
+  margin-right: 10px;
+  height: 8px;
+}
+.newPice{
+  font-size: 15px;
+color: #E45B5B;
+  float: left;
+}
+.oldPice{
+  font-size: 13px;
+  margin-right: 10px;
+  margin-top: 1px;
+color: #929292;
+text-decoration:line-through;
+float: left;
+}
+.pay{
+  background: #FA7635;
+border-radius: 5px;
+width: 90px;
+height: 33px;
+  float: right;
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 33px;
+color: #FFFFFF;
+}
+.left{
+ float: left;
+}

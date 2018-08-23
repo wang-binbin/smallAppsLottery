@@ -1,0 +1,13 @@
+<!--pages/deposit/deposit.wxml-->
+<view class='content'>
+  <view class='receive'>
+    <view class='receiveBy'>接收方</view>
+    <input class='input' bindinput='receiveBy' placeholder='请输入提取地址' placeholder-style='color: #B7B7B7;'></input>
+  </view>
+  <view class='receive'>
+    <view class='receiveBy'>数量</view>
+    <input class='input inputNum' bindinput='inputNum' type='digit' placeholder='请输入提取数量' placeholder-style='color: #B7B7B7;'></input>
+  </view>
+
+</view>  <view class='deposit'>可提取 <e class='balanceColor'>{{balance}}</e> {{symbol}}</view>
+<view class='butt' bindtap='confirm'>确定</view>

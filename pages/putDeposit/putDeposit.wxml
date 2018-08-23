@@ -1,0 +1,16 @@
+<!--pages/putDeposit/putDeposit.wxml-->
+<view class='head'>
+<view class='time'>时间</view>
+<view class='card'>通证</view>
+<view class='num'>数量</view>
+<view class='status'>状态</view>
+</view>
+<view class='con'>
+<view class='content' wx:for='{{list.content}}' wx:key="index">
+<view class='time'>{{item.actionTime}}</view>
+<view class='card'>{{item.tokenSymbol}}</view>
+<view class='num'>{{item.amount}}</view>
+<view class='status'>{{item.status=="0000"?'待审核':item.status=="1000"?'待交易确认':item.status=="2000"?'已完成':item.status=="3000"?'已撤销':''}}</view>
+<e class='clear'></e>
+</view>
+</view>

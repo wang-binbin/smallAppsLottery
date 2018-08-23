@@ -1,0 +1,55 @@
+/* pages/putDeposit/putDeposit.wxss */
+
+page {
+  background: #f2f2ef;
+}
+
+.head {
+  margin: 0 15px;
+  font-size: 14px;
+  color: #959595;
+  height: 50px;
+  line-height: 50px;
+}
+
+.con {
+  background: #fff;
+}
+
+.content {
+  margin: 0 15px;
+  font-size: 14px;
+  color: #181818;
+  background: #fff;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.content view {
+  float: left;
+}
+
+.head view {
+  float: left;
+}
+
+.time {
+  text-align: center;
+  width: 85px;
+}
+
+.card {
+  width: 50px;
+  text-align: center;
+}
+
+.num {
+  width: 140px;
+  text-align: center;
+}
+
+.status {
+  width: 70px;
+  text-align: center;
+}

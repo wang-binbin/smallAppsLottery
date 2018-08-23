@@ -7,14 +7,14 @@
     <!--头部复用  -->
     <view class='contentList'>
       <view class='contentHead'>
-        <image class='userBack' src='{{item.picPath==null?"../../images/default.png":item.picPath}}'></image>
+        <image class='userBack' src='{{item.giftCard.picPath==null?"../../images/default.png":item.giftCard.picPath}}'></image>
       </view>
     </view>
   </view>
 
-  <view class='prize'>奖品:{{item.name}}×{{item.amount}}份</view>
+  <view class='prize'>奖品:{{item.giftCard.name}}×{{item.giftCard.amount}}份</view>
   <view class='lotteryData'>
-    <view class='date'>{{item.awardTime}}</view>
+    <view class='date'>{{item.giftCard.awardTime}}</view>
     <view class='lotteryWay'>自动抽奖</view>
   </view>
 

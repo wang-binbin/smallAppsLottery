@@ -1,28 +1,42 @@
 <!--pages/myGiftCard/myGiftCard.wxml-->
 <view class='body'>
-  <view class='await'>
-    <view class='awaitTitle'>待开奖</view>
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">待开奖
+      <view class="swiper-tab-bott" wx:if="{{currentTab==0 }}"></view>
+    </view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已开奖
+      <view class="swiper-tab-bott" wx:if="{{currentTab==1 }}"></view>
+    </view>
+  </view>
+  <view class='helpfixed'></view>
 
-    <view class='awaitLst' data-id='{{item.id}}' wx:for="{{list}}" wx:key="index" bindtap='particulars'>
-      <view class='name'>奖品:{{item.name}}×{{item.amount}}份</view>
-      <view class='logo'>
-        <image src='../../images/rig.png'></image>
+  <!--滚动的页面  -->
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{wonListHeight-40}}px' bindchange="bindChange">
+    <swiper-item style=' overflow: auto;height: 500px;'>
+      <view class='await'>
+        <view class='awaitLst' data-id='{{item.id}}' wx:for="{{openList.content}}" wx:key="index" bindtap='particulars'>
+          <view class='name'>奖品:{{item.name}}×{{item.amount}}份</view>
+          <view class='logo'>
+            <image src='../../images/rig.png'></image>
+          </view>
+          <view class='date'>{{item.awardTime}}</view>
+        </view>
       </view>
-      <view class='date'>{{item.awardTime}}</view>
-    </view>
-  </view>
+      <view class='more' bindtap='moreData'>{{openList.last==true?'无更多数据~':openList.last==false?'加载更多~':''}}</view>
+    </swiper-item>
 
-  <view class='awaitTitle'>已开奖</view>
+    <!--已开奖  -->
+    <swiper-item style=' overflow: auto;height: 500px;'>
 
-  <view class='awaitLst' data-id='{{item.id}}' wx:for="{{listOpen}}" wx:key="index" bindtap='particulars'>
-    <view class='name'>奖品:{{item.name}}×{{item.amount}}份</view>
-    <view class='logo'>
-      <image src='../../images/rig.png'></image>
-    </view>
-    <view class='date'>{{item.awardTime}}</view>
-  </view>
-
-
-
+      <view class='awaitLst' data-id='{{item.id}}' wx:for="{{closedList.content}}" wx:key="index" bindtap='particulars'>
+        <view class='name'>奖品:{{item.name}}×{{item.amount}}份</view>
+        <view class='logo'>
+          <image src='../../images/rig.png'></image>
+        </view>
+        <view class='date'>{{item.awardTime}}</view>
+      </view>
+      <view class='more' bindtap='moreData'>{{closedList.last==true?'无更多数据~':closedList.last==false?'加载更多~':''}}</view>
+    </swiper-item>
+</swiper>
 
 </view>

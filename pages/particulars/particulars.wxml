@@ -32,15 +32,27 @@
         </view>
       </view>
       <view class='dividing'></view>
-      <view class='introduce' style='background:#fff;' wx:if="{{item.giftCard.level=='1000'}}">
+      <view class='introduce' style='background:#fff;' wx:if="{{item.giftCard.introduction!=null&&item.giftCard.introduction!=''}}">
         <view class='introduceHead'>奖品介绍：</view>
         <view style='padding:15px'>
-          <text style='width:100%;' class='introduceTxt'>{{item.giftCard.introduction}}</text>
+          <view wx:for='{{item.giftCard.introduction}}' wx:key='index' wx:for-item="itemName">
+            <view class='copy' wx:if='{{itemName.type=="copy"}}'>
+              <view class='copyTitle'>{{itemName.title}}</view>
+              <view class='copyCon'>
+                <view>{{itemName.value}}</view>
+              </view>
+              <view class='copyBtn' bindtap='copyBtn' data-copy='{{itemName.value}}'>点此一键复制</view>
+            </view>
+            <text wx:if='{{itemName.type=="text"}}'>{{itemName.value}}</text>
+            <view class='img' wx:if='{{itemName.type=="img"}}'>
+              <image mode='aspectFit' src='{{itemName.src}}'></image>
+            </view>
+          </view>
         </view>
       </view>
       <view class='foot'>
 
-        <view class='footPadding'   wx:if="{{item.isParticipated=='false'&&item.giftCard.status=='0000'}}" >
+        <view class='footPadding' wx:if="{{item.isParticipated=='false'&&item.giftCard.status=='0000'}}">
           <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
           <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true'>
 
@@ -60,9 +72,9 @@
           </view>
           <view class='wonText'>恭喜，您中奖了</view>
           <view class='wonGiftText'>奖品:{{item.giftCard.name}}</view>
-           <view class='hidden' bindtap='hidden' wx:if='{{item.giftCard.wayOfGiving=="4"}}'>
-           <view wx:if='{{hidden}}'>查看领奖码</view>
-          <view wx:else='{{hidden}}' bindlongtap='coypHidden'>{{item.address}}</view>
+          <view class='hidden' bindtap='hidden' wx:if='{{item.giftCard.wayOfGiving=="4"}}'>
+            <view wx:if='{{hidden}}'>查看领奖码</view>
+            <view wx:else='{{hidden}}' bindlongtap='coypHidden'>{{item.address}}</view>
           </view>
           <view class='hasAddAddress' bindtap='select'>
             <view class='hasAddress'>
@@ -72,7 +84,7 @@
               <view class='address' wx:if='{{item.giftCard.wayOfGiving=="4"}}'>添加微信:{{item.giftCard.awardWechat}}</view>
             </view>
 
-             <view class='modificationAddress'>请在七个工作日内填写收奖信息，否则视为放弃领取奖励</view> 
+            <view class='modificationAddress'>请在七个工作日内填写收奖信息，否则视为放弃领取奖励</view>
           </view>
         </view>
 
@@ -96,7 +108,7 @@
         <view class='num' wx:else="{{item.giftCard.status=='1000'}}">中奖者名单</view>
         <view class='photo' wx:if="{{item.giftCard.status=='1000'}}">
           <image wx:for="{{item.winnerList}}" wx:key="index" src='{{item}}'></image>
-         {{beyond}}
+          {{beyond}}
         </view>
       </view>
     </view>
@@ -104,7 +116,7 @@
       <view class='bottomLeft' wx:if="{{item.isWon=='false'||item.isWon==null}}">分享给朋友
         <button open-type="share" class='shareBtn'></button>
       </view>
-       <view class='flaunt' wx:if="{{item.isWon=='true'}}" bindtap='flaunt'>炫耀一下</view>
+      <view class='flaunt' wx:if="{{item.isWon=='true'}}" bindtap='flaunt'>炫耀一下</view>
       <view class='bottomRight' wx:if="{{pageId=='0'}}" bindtap='backHome'>查看更多抽奖</view>
       <view class='bottomRight' wx:if="{{pageId=='1'}}" bindtap='initiate'>生成分享图片</view>
 

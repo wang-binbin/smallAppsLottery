@@ -1,5 +1,7 @@
 /* pages/home/home.wxss */
-
+page{
+  background: #f2f2ef;
+}
 .head {
   height: 51px;
   width: 100%;
@@ -86,11 +88,21 @@ height: 100%;
 }
 .share view {
   float: left;
+  color: #FF5849;
   height: 51px;
 }
+
+.shareIco image{
+width:25px;
+height:20px;
+margin-top:15px;
+margin-left:10px;
+margin-right: 10px;
+}
+
 .shareIcon{
-  width: 75px;
-height: 87px;
+  width: 82px;
+height: 77px;
   position: relative;
 }
 .btnShare{
@@ -109,8 +121,8 @@ width: 246px;
 position: fixed;
 bottom: 20px;
 right: 20px;
-width: 75px;
-height: 87px;
+width: 82px;
+height: 77px;
 }
 
 .content {

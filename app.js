@@ -39,7 +39,8 @@ App({
       }
     })
   },
-  
+
+  PICE_URL: "https://service.maggie.vip/coinmarketcap/",
   REQ_URL: 'https://service.maggie.vip/giftcard/api/',
   FILE_URL: "https://giftcard-prod-bucket.maggie.vip/",
   globalData: {
@@ -49,6 +50,8 @@ App({
     scene:null,
     invitorId:null,
     userId:null,
+    introduction: null
+
   },
   state:{
     loginLock:false

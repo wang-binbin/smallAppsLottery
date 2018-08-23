@@ -1,0 +1,25 @@
+<!--pages/pay/pay.wxml-->
+<view class='head'>
+  <view class='title'>付费功能</view>
+  <view class='icon'>
+    <image src='../../images/titleIcon.png'></image>图文编辑
+  </view>
+  <view class='icon'>
+    <image src='../../images/titleIcon.png'></image>可发送Token红包(支持BTC、ETH、EOS等)
+  </view>
+  <view class='icon'>
+    <image src='../../images/titleIcon.png'></image>可发送自定义Token红包
+  </view>
+</view>
+<view class='content' wx:for='{{list}}' wx:key='{{index}}'>
+  <view class='list'>
+  <view class='left'>
+    <view class='time'>{{item.name}}</view>
+    <view class='pice'>
+      <view class='oldPice'>{{item.originalPrice/100}}元</view>
+      <view class='newPice'>{{item.discountPrice/100}}元</view>
+    </view>
+    </view>
+    <view class='pay' bindtap='pay' data-pice='{{item.discountPrice}}'>立即购买</view>
+  </view>
+</view>

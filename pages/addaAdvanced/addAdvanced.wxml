@@ -1,0 +1,140 @@
+<!--pages/addaAdvanced/addAdvanced.wxml-->
+<!-- <view class='tabHead'>
+  <view class='tabLeft {{redPackage?"on":default}}' bindtap='redPackage'>通证红包卡
+    <view class='tabBoder' wx:if='{{redPackage}}'></view>
+  </view>
+  <view class='tabRight {{advanced?"on":default}}' bindtap='advanced'>高级礼品卡
+    <view class='tabBoder' wx:if='{{advanced}}'></view>
+  </view>
+</view>
+<view class='padding'></view> -->
+
+<!-- <view class='body' wx:if='{{advanced}}'>
+  <view class='content'>
+    
+    <view class='contentList'>
+      <view class='contentHead'>
+        <view class='labelLeft'>
+          <!-- <view class='labelText'>{{item.Type}}</view> -->
+        <!-- </view>
+        <view class='leabelRight' bindtap='cehngePhoto'>更换奖品图片</view>
+        <image class='userBack' src='{{src}}'></image>
+      </view>
+    </view>
+  </view>
+
+  <view class='head'>
+    <view class='prizeName'>
+      <view class='prizeNameOne'>
+        <view class=''>奖品名称</view>
+        <view class="section">
+          <input type="text" bindinput='inputchange' value='{{name}}' placeholder="请输入奖品名称，如1000mag" maxlength='20' placeholder-style='font-size: 15px;color: #B7B7B7;' />
+        </view>
+        <view class='warning' wx:if='{{byte}}'>不能超过20个字符</view>
+      </view>
+
+    </view>
+    <view class='prizeNumber'>
+      <view class=''>奖品数量</view>
+      <view class='part'>份</view>
+      <view class="num">
+        <input type="number" placeholder="数量不得超过999" value='{{amount}}' bindinput='numberchange' maxlength='3' placeholder-style='font-size: 15px;color: #B7B7B7;' />
+      </view>
+      <view class='warning' wx:if='{{bytenumber}}'>数量不得超过 999</view>
+    </view>
+  </view>
+  <view class='imgTxt'>
+    <view class='imgTxtTitle'>图文介绍</view>
+    <view class='imgTxtCon'>
+      <view class='addImgTxt' bindtap='addImgTxt'>{{introduction!=null?'已完成图文介绍可编辑':introduction==null?'添加图文介绍':''}}</view>
+    </view>
+  </view>
+  <view class='foot'>
+    <view class='footTitle'>奖品到达设定时间自动开奖</view>
+    <view class='LotteryStart'>
+      <view class='starttime'>开奖时间</view>
+      <view class="section__title">
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+          <view class="picker">
+            {{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}:{{multiArray[2][multiIndex[2]]}}
+            <image class='rightpicker' src='../../images/rig.png'></image>
+          </view>
+        </picker>
+      </view>
+      <view class='warning' wx:if='{{newDate}}'>开奖时间不得低于现在时间</view>
+    </view>
+    <view class='LotteryStyle'></view>
+    <view class='LotteryStart mb'>
+      <view class='starttime'>领奖方式</view>
+      <view class="section__title">
+        <picker bindchange="bindPickerChange" value="{{wayOfGiving}}" range="{{array}}">
+          <view class="picker" style='text-align:right'>
+            {{array[wayOfGiving]}}
+            <image class='rightpicker' style='margin-right:15px;' src='../../images/rig.png'></image>
+          </view>
+        </picker>
+
+        <view class='clear'></view>
+      </view>
+      <view class='LotteryStart' wx:if='{{WechatAccept}}'>
+        <input type="text" bindinput='Wechat' value='{{Wechat}}' placeholder="请输入客服微信号码" maxlength='24' placeholder-style='font-size: 15px;color: #B7B7B7;' />
+      </view>
+    </view>
+
+
+  </view>
+
+  <view class='bottom'>
+    <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true'>
+      生成礼品卡
+      <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}' disabled='{{lock}}'>Submit</button>
+    </form>
+  </view>
+</view> --> 
+<!-- wx:if='{{redPackage}}' -->
+<view >
+  <view class='redCon'>
+    <view class='redTitle'>选择要发送的令牌</view>
+    <view class='redList'>
+      <view wx:for='{{select}}' wx:key='index' class='{{item.checked?"sele":default}}' bindtap='Select' data-index='{{index}}'>{{item.tokenSymbol}}</view>
+      <e class='clear'></e>
+    </view>
+    <view class='market' wx:if='{{price!=null&&price!=""}}'>{{tokenSymbol}}当前行情≈<e class='marketColor'>{{price}}元</e></view>
+    <view class='interval'></view>
+    <view class='typeList'>
+      <view class='{{selePackage?"selePackage":""}}' bindtap='luck'>拼手气红包</view>
+      <view class='{{!selePackage?"selePackage":""}}' bindtap='common'>普通红包</view>
+      <e class='clear'></e>
+    </view>
+    <view class='interval'></view>
+    <view class='redContent'>
+      <view class='sum'>
+        <view class='sumTitle'>{{selePackage?'通证总量':!selePackage?'单个数量':''}}</view>
+        <view class='sumUnit'>{{tokenSymbol}}</view>
+        <input class='sumInput' placeholder='{{sumInput}}' bindinput='SumInput' type='digit' placeholder-style='color: #B7B7B7;' value='{{sumValue}}'></input>
+        <e class='clear'></e>
+      </view>
+    </view>
+    <view class='redContent'>
+      <view class='sum'>
+        <view class='sumTitle'>红包卡数量</view>
+        <view class='sumUnit'>份</view>
+        <input class='sumInput ' placeholder='数量' bindinput='NumInput' type='number' placeholder-style='color: #B7B7B7;' value='{{numValue}}' maxlength='3'></input>
+        <e class='clear'></e>
+      </view>
+    </view>
+  </view>
+<view class='interval'></view>
+ <view class='description'>
+   <input class='descriptionInput '  bindinput='descriptionInput' type='text' value='{{descriptionInput}}'></input>
+   </view>
+<view class='aggregate'>共 <e class='aggregatetxt'>{{selePackage?gross:!selePackage?aggregate:""}}</e> {{tokenSymbol}}</view>
+<view class='usable'>可用 {{availableBalance}} {{tokenSymbol}}</view>
+<view class='send' >
+   <form bindsubmit="send" bindreset="formReset" report-submit='true'>
+      立刻发送
+      <button class='Submit' formType="submit"  disabled='{{lockk}}'></button>
+    </form>
+</view>
+</view>
+<button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>

@@ -34,7 +34,12 @@
       <view class='warning' wx:if='{{bytenumber}}'>数量不得超过 999</view>
     </view>
   </view>
-
+  <view class='imgTxt'>
+    <view class='imgTxtTitle'>图文介绍</view>
+    <view class='imgTxtCon'>
+      <view class='addImgTxt' bindtap='addImgTxt'>{{introduction!=null?'已完成图文介绍可编辑':introduction==null?'添加图文介绍':''}}</view>
+    </view>
+  </view>
   <view class='foot'>
     <view class='footTitle'>奖品到达设定时间自动开奖</view>
     <view class='LotteryStart'>
@@ -63,16 +68,93 @@
         </picker>
       </view>
     </view>
+
   </view>
 
   <view class='LotteryStart' wx:if='{{WechatAccept}}'>
-  <input type="text" bindinput='Wechat' value='{{Wechat}}' placeholder="请输入客服微信号码" maxlength='24' placeholder-style='font-size: 15px;color: #B7B7B7;' />
+    <input type="text" bindinput='Wechat' value='{{Wechat}}' placeholder="请输入客服微信号码" maxlength='24' placeholder-style='font-size: 15px;color: #B7B7B7;' />
   </view>
-  <view class='bottom' bindtap='establish'>
+  <view class='isHome' bindtap='isHome'>是否申请展示到首页？</view>
+  <!-- <view wx:if='{{getSystemConfig.disableAdvancedGiftCard=="false"}}'>
+  <view class='advanced' bindtap='advanced'>使用高级功能></view>
+  <view class='expireTime'>{{vipExpiryTime==null?'未开通':vipExpiryTime!=null?'到期时间：'+vipExpiryTime:''}}</view>
+  </view> -->
+  <view class='bottomPadding'></view>
+  <view class='bottom'>
     <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true'>
       生成礼品卡
       <button class='Submit' formType="submit" data-id='{{item.giftCard.id}}' disabled='{{lock}}'>Submit</button>
     </form>
   </view>
   <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+
+
+
+
+
+  <view class='popUp' wx:if='{{popUp}}'>
+    <view class='popUpContent'>
+      <view class='close' bindtap='isHome'>
+        <image src='../../images/close.png'></image>
+      </view>
+      <view class='upTitle'>申请上首页</view>
+      <view class='upTxt'>
+        <view class='icon'>
+          <image src='../../images/titleIcon.png'></image>
+        </view>
+        <view class='upTxtContent'>展示到首页可让你的抽奖被通证礼品卡所有用户参与，获得更多的曝光以及参与者。</view>
+      </view>
+      <view class='upTxt'>
+        <view class='icon'>
+          <image src='../../images/titleIcon.png'></image>
+        </view>
+        <view class='upTxtContent'>申请通过可在抽奖详情页对你的项目进行更加详细的描述，以及导流。
+        </view>
+      </view>
+      <view class='upTxt'>
+        <view class='icon'>
+          <image src='../../images/titleIcon.png'></image>
+        </view>
+        <view class='upTxtContent upTxtContentB'>如要展示到首页可添加通证礼品卡客服进行申请。</view>
+      </view>
+      <view class='clear'></view>
+      <view class='btn' bindtap='copy'> 微信号：maggiekf</view>
+      <view class='hint'>点击复制</view>
+    </view>
+  </view>
+  <!-- <view class='popUp'   wx:if='{{expireTime}}' >
+    <view class='popUpContent expireTimeContent'>
+      <view class='close' bindtap='advanced'>
+        <image src='../../images/close.png'></image>
+      </view>
+      <view class='upTitle'>付费功能</view>
+      <view class='upTxt'>
+        <view class='expireTimeicon icon'>
+          <image src='../../images/titleIcon.png'></image>
+        </view>
+        <view class='upTxtContent expireTimeTxtContent'>礼品卡功能支持图文详情编辑，支持小程序导流</view>
+      </view>
+      <view class='upTxt'>
+        <view class='expireTimeicon icon'>
+          <image src='../../images/titleIcon.png'></image>
+        </view>
+        <view class='upTxtContent expireTimeTxtContent'>支持发送Token红包（类微信红包）</view>
+      </view>
+      <view class='upTxt'>
+        <view class='expireTimeicon icon'>
+          <image src='../../images/titleIcon.png'></image>
+        </view>
+        <view class='upTxtContent expireTimeTxtContent'>支持代币充值、转账、提现功能</view>
+      </view>
+      <view class='clear'></view>
+      <view class='WeChatCode'>
+        <image src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/WeChatCode.png'></image>
+      </view>
+      <view class='addWeChat'  bindtap='copy'>开通请添加客服微信：
+        <e class='wechatNuber'>maggiekf01</e>
+        （点击复制）
+      </view>
+    </view>
+  </view>
+</view> -->
 </view>

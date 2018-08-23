@@ -1,23 +1,40 @@
 {
-  "pages": [
+  "pages": ["pages/home/home",
+      "pages/pay/pay",
+  "pages/addaAdvanced/addAdvanced",
+    "pages/user/user",
+      "pages/add/add",
+      "pages/putDeposit/putDeposit",
+   
+      "pages/deposit/deposit",
+    "pages/papersParticulars/papersParticulars",
     
-    "pages/home/home",
-   "pages/particulars/particulars",
+    "pages/authentication/authentication",
+  
+      "pages/redPackageRecord/redPackageRecord",
+
+    "pages/robRedPackage/robRedPackage",
+
+   
+  
+    
+    "pages/redPackagePhoto/redPackagePhoto",
+    "pages/editor/editor",
+    "pages/myAddGiftCard/myAddGiftCard",
+    "pages/particulars/particulars",
     "pages/addAddress/addAddress",
-    "pages/add/add",
+   
     "pages/flaunt/flaunt",
     "pages/winUserInfo/winUserInfo",
     "pages/contact/contact",
     "pages/detail/detail",
     "pages/myBalance/myBalance",
-    "pages/myAddGiftCard/myAddGiftCard",
     "pages/compileAddress/compileAddress",
     "pages/myGiftCard/myGiftCard",
     "pages/walletAddressList/walletAddressList",
     "pages/producePhoto/producePhoto",
     "pages/giftParticulars/giftParticulars",
     "pages/sponsor/sponsor",
-    "pages/user/user",
     "pages/skip/skip"
   ],
   "window": {

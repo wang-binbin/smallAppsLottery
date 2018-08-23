@@ -1,0 +1,50 @@
+<!--pages/myAddGiftCard/myAddGiftCard.wxml-->
+<!--标题的页面  -->
+<view class='body'>
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">我收到的
+      <view class="swiper-tab-bott" wx:if="{{currentTab==0 }}"></view>
+    </view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">我发起的
+      <view class="swiper-tab-bott" wx:if="{{currentTab==1 }}"></view>
+    </view>
+  </view>
+  <view class='helpfixed'></view>
+
+  <!--滚动的页面  -->
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{wonListHeight-50}}px' bindchange="bindChange">
+
+    <swiper-item style=' overflow: auto;height: 500px;'>
+      <view class='receive' wx:for='{{receivedList.content}}' wx:key='{{index}}' data-id='{{item.envelopeId}}' bindtap='robRedPackage'>
+        <view class='type'>
+          <view class='typeLeft'>{{item.type=='0000'?'拼手气红包卡':item.type=='0001'?'普通红包卡':''}}</view>
+          <view class='typeRight'>{{item.snatchedAmount}}{{item.tokenSymbol}}</view>
+        </view>
+        <view class='time type'>
+          <view class='timeLeft'>{{item.participateTime}}</view>
+          <view class='timeRight'>{{item.snatchedNumber}}/{{item.envelopeNumber}}个</view>
+        </view>
+
+      </view>
+        <view class='more' bindtap='moreData'>{{receivedList.last==true?'无更多数据~':receivedList.last==false?'加载更多~':''}}</view>
+    </swiper-item>
+
+    <!--已中奖  -->
+    <swiper-item style=' overflow: auto;height: 500px;'>
+ <view class='receive' wx:for='{{sentList.content}}' wx:key='{{index}}' data-id='{{item.envelopeId}}'  bindtap='robRedPackage'>
+        <view class='type'>
+          <view class='typeLeft'>{{item.type=='0000'?'拼手气红包卡':item.type=='0001'?'普通红包卡':''}}</view>
+          <view class='typeRight'>{{item.tokenTotal}}{{item.tokenSymbol}}</view>
+        </view>
+        <view class='time type'>
+          <view class='timeLeft'>{{item.createTime}}</view>
+          <view class='timeRight'>{{item.snatchedNumber}}/{{item.envelopeNumber}}个</view>
+        </view>
+
+      </view>
+        <view class='more' bindtap='moreData'>{{sentList.last==true?'无更多数据~':sentList.last==false?'加载更多~':''}}</view>
+    </swiper-item>
+
+  </swiper>
+
+</view>

@@ -17,11 +17,43 @@ Page({
    */
   onLoad: function(options) {
     var that = this
-    let awardTime = setDate()
-    options.picPath = app.FILE_URL + options.picPath
-    options.awardTime = awardTime
-    that.setData({
-      item: options,
+    console.log(options)
+    // let awardTime = setDate()
+    // options.picPath = app.FILE_URL + options.picPath
+    // options.awardTime = awardTime
+    // that.setData({
+    //   item: options,
+    // })
+    common.req({
+      url: 'gift/getGiftDetail',
+      data: {
+        'giftId': options.giftId
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      dataType: 'json',
+      method: 'POST',
+      success: function (res) {
+
+        let str = res.data.data.giftCard.awardTime;
+        str = str.replace(/-/g, '/');
+        let date = new Date(str);
+        let awardTime = setDate(date)
+        res.data.data.giftCard.awardTime = awardTime,
+          res.data.data.giftCard.picPath = app.FILE_URL + res.data.data.giftCard.picPath
+        if (res.data.data.participantCount > 8) {
+          that.setData({
+            beyond: '...'
+          })
+        }
+        that.setData({
+          item: res.data.data
+        })
+        console.log(that.data.item)
+
+      },
+
     })
 
     function setDate() {
@@ -129,8 +161,8 @@ Page({
 
     }
     return {
-      title: that.data.item.nickName + '准备了' + that.data.item.amount + '份' + that.data.item.name + '的礼品卡，大家快来抢。',
-      path: '/pages/particulars/particulars?giftId=' + that.data.item.giftId + "&invitorId=" + (app.globalData.userId || '')
+      title: that.data.item.createrInfo.nickName + '准备了' + that.data.item.giftCard.amount + '份' + that.data.item.giftCard.name + '的礼品卡，大家快来抢。',
+      path: '/pages/particulars/particulars?giftId=' + that.data.item.giftCard.id + "&invitorId=" + (app.globalData.userId || '')
     }
   }
 

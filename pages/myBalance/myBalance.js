@@ -11,9 +11,10 @@ Page({
   list:[]
   },
   balanceList:function(e){
-    console.log(e.currentTarget.dataset.id)
+    let that=this
+    console.log(e.currentTarget.dataset.index)
 wx:wx.navigateTo({
-  url: '../detail/detail?balanceType=' + e.currentTarget.dataset.id,
+  url: '../papersParticulars/papersParticulars?balance=' + that.data.list[e.currentTarget.dataset.index].balance + "&id=" + that.data.list[e.currentTarget.dataset.index].token.id + "&introduction=" + that.data.list[e.currentTarget.dataset.index].token.introduction + "&symbol=" + that.data.list[e.currentTarget.dataset.index].token.symbol + "&picPath=" + that.data.list[e.currentTarget.dataset.index].token.picPath + "&minEnvelopeAmount=" + that.data.list[e.currentTarget.dataset.index].token.minEnvelopeAmount,
 })
 
   },
@@ -23,7 +24,7 @@ wx:wx.navigateTo({
   onLoad: function (options) {
     let that=this
     common.req({
-      url: 'user/getBalance',
+      url: 'user/getToken',
       data: {},
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -32,6 +33,10 @@ wx:wx.navigateTo({
       method: 'POST',
       success: function (res) {
         console.log(res)
+        for(let i=0;i<res.data.data.length;i++){
+          res.data.data[i].balance = Number(res.data.data[i].balance),
+            res.data.data[i].token.picPath = app.FILE_URL + res.data.data[i].token.picPath
+        }
         that.setData({
           list:res.data.data
         })

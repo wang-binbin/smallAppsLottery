@@ -11,7 +11,16 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  getUserInfo: function(e) { //获取头像昵称
+  putDeposit:function(){
+wx:wx.navigateTo({
+  url: '../putDeposit/putDeposit',
+  success: function(res) {},
+  fail: function(res) {},
+  complete: function(res) {},
+})
+  },
+
+  getUserInfo: function (e) { //获取头像昵称
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     if (e.detail.errMsg == 'getUserInfo:ok') {
@@ -21,14 +30,28 @@ Page({
       })
       common.uploadInfo(e.detail.userInfo.nickName, e.detail.userInfo.avatarUrl)
     }
-  },
-  myAddGiftCard: function() { //跳转我生成的礼品卡页面
-
-    wx: wx.navigateTo({
-      url: '../myAddGiftCard/myAddGiftCard',
+  }, 
+  authentication:function(){wx:wx.navigateTo({
+    url: '../authentication/authentication',
+    success: function(res) {},
+    fail: function(res) {},
+    complete: function(res) {},
+  })},
+  redPackageRecord:function(){
+    wx:wx.navigateTo({
+      url: '../redPackageRecord/redPackageRecord',
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
+    })
+  },
+  myAddGiftCard: function () { //跳转我生成的礼品卡页面
+
+    wx: wx.navigateTo({
+      url: '../myAddGiftCard/myAddGiftCard',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
   // walletAddress: function() { //钱包地址页面
@@ -36,17 +59,17 @@ Page({
   //     url: '../walletAddressList/walletAddressList',
   //   })
   // },
-  myGiftCard: function() { //我生成的礼品卡
+  myGiftCard: function () { //我生成的礼品卡
     wx: wx.navigateTo({
       url: '../myGiftCard/myGiftCard',
     })
   },
-  contact:function() {//联系我们
+  contact: function () {//联系我们
     wx: wx.navigateTo({
       url: '../contact/contact',
     })
   },
-  myBalance:function(){//我的余额
+  myBalance: function () {//我的余额
     wx: wx.navigateTo({
       url: '../myBalance/myBalance',
     })
@@ -54,7 +77,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: '我的'
     })
@@ -63,17 +86,32 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
+    let that=this
     wx.setStorage({
       key: "tabIndex",
       data: 2
+    })
+    common.req({
+      url: 'getSystemConfig',
+      data: '',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      dataType: 'json',
+      method: 'POST',
+      success: function (res) {
+        that.setData({
+          getSystemConfig: res.data.data
+        })
+      },
     })
     if (app.globalData.userInfo) { //在app页面获取userInfo信息
       this.setData({
@@ -110,21 +148,21 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     wx.stopPullDownRefresh() //停止下拉刷新
 
   },
@@ -132,7 +170,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 

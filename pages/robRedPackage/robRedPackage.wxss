@@ -1,0 +1,198 @@
+/* pages/robRedPackage/robRedPackage.wxss */
+
+page {
+  background: #f2f2ef;
+}
+
+.rob {
+  background: url("https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/redPackage.png");
+  width: 345px;
+  height: 524px;
+  background-size: cover;
+  margin: 10px auto;
+}
+
+.userImg {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  padding-top: 50px;
+  margin-bottom: 6px;
+}
+
+.redPackageImg {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+  padding-top: 18px;
+  margin-bottom: 6px;
+}
+
+.redPackageImg image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.userImg image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.userName {
+  font-size: 15px;
+  text-align: center;
+  color: #fff2bc;
+}
+
+.redPackageDes {
+  font-size: 14px;
+  text-align: center;
+  margin: 17px 0 4px 0;
+  color: #3c3c3c;
+}
+
+.redPackagemessage {
+  font-size: 13px;
+  text-align: center;
+  color: #b4b4b4;
+}
+
+.userDes {
+  font-size: 16px;
+  text-align: center;
+  color: #fff2bc;
+  margin: 15px 0 42px 0;
+}
+
+.message {
+  font-size: 22px;
+  text-align: center;
+  color: #fff2bc;
+}
+
+.head {
+  width: 100%;
+  position: relative;
+  height: 286px;
+}
+
+.back {
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.money {
+  text-align: center;
+  font-size:36px;
+  margin-top: 12px;
+  color: #3c3c3c;
+}
+
+.moneyT {
+  font-size: 18px;
+  color: #626262;
+}
+
+.cue {
+  font-size: 12px;
+  text-align: center;
+  color: #a2a2a2;
+}
+
+.surplus {
+  height: 37px;
+  line-height: 37px;
+  text-indent: 1em;
+  font-size: 12px;
+  color: #bebebe;
+}
+
+.snatchedList {
+  background: #fff;
+  padding: 0 15px;
+}
+
+.robImg {
+  border-bottom: 1px solid #d8d8d8;
+  height: 75px;
+}
+.robOver{
+  font-size: 30px;
+  text-align: center;
+color: #B4B4B4;
+margin-top: 40px;
+}
+.robAvatarUrl {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  float: left;
+  margin-top: 16px;
+}
+
+.robInfo {
+  float: left;
+  margin-top: 14px;
+  margin-left: 10px;
+}
+
+.robnickName {
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 130px;
+  margin-bottom: 4px;
+  color: #2e2e2e;
+}
+
+.robparticipateTime {
+  font-size: 13px;
+  color: #a2a2a2;
+}
+
+.robRight {
+  float: right;
+}
+
+.robAmount {
+  margin-top: 11px;
+  font-size: 15px;
+  color: #272727;
+}
+
+.luck {
+  width: 60px;
+  height: 17px;
+  margin-top: 5px;
+}
+
+.continueShear{
+width:104px;
+height:61px;
+position: fixed;
+right: 20px;
+bottom: 50px;
+}
+.moreToken{
+width:104px;
+height:81px;
+position: fixed;
+right: 20px;
+bottom: 50px;
+}
+.userinfo {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+  opacity: 0;
+}

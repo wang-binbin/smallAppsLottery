@@ -1,9 +1,7 @@
 /* pages/detail/detail.wxss */
-page{
-  background: #f2f2ef;
-}
+
 .padding{
-  height: 10px;
+  height: 10px;  background: #f2f2ef;
 }
 .left{
   margin-top: 12px;
@@ -13,18 +11,11 @@ page{
   position: relative;
   background: #fff;
   height: 70px;
-  padding: 0 15px;
-
+  margin: 0 15px;
+border-bottom: 1px #D8D8D8 solid;
 }
 
-.border{
-  position: absolute;
-  width: 345px;
-  margin: 0 auto;
-  bottom: 0;
-  height: 1px;
-  background: #D8D8D8;
-}
+
 .time{font-size: 13px;
 color: #A2A2A2;
 margin-top: 6px;}
@@ -38,4 +29,7 @@ color: #2E2E2E;
   line-height: 70px;
 color: #53AD21;
   float: right;
+}
+.red{
+  color: #FA7635;
 }

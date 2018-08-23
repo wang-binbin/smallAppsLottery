@@ -28,11 +28,39 @@
         <image src='../../images/rig.png'></image>
       </view>
     </view>
-    <view class='myBalance' bindtap='myBalance'>
+    <view class='myBalance' bindtap='myBalance' wx:if='{{getSystemConfig.disableBalance=="false"}}'>
       <view class='myLogo'>
         <image src='../../images/myBalance.png'></image>
       </view>
       <view class='myText'>我的余额</view>
+      <view class='myRig'>
+        <image src='../../images/rig.png'></image>
+      </view>
+    </view>
+        <view class='myBalance' bindtap='authentication'>
+      <view class='myLogo'>
+        <image src='../../images/idCard.png'></image>
+      </view>
+      <view class='myText'>实名认证</view>
+      <view class='myRig'>
+        <image src='../../images/rig.png'></image>
+      </view>
+    </view>
+            <view class='myBalance' bindtap='putDeposit' wx:if='{{getSystemConfig.disableWithdrawal=="false"}}'>
+      <view class='myLogo'>
+        <image src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/putDeposit.png'></image>
+      </view>
+      <view class='myText'>提现明细</view>
+      <view class='myRig'>
+        <image src='../../images/rig.png'></image>
+      </view>
+    </view>
+    <view class='padding'></view>
+        <view class='myBalance' bindtap='redPackageRecord' wx:if='{{getSystemConfig.disableEnvelopeRecord=="false"}}'>
+      <view class='myLogo'>
+        <image src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/redPackageReceive.png'></image>
+      </view>
+      <view class='myText'>我的红包卡记录</view>
       <view class='myRig'>
         <image src='../../images/rig.png'></image>
       </view>
@@ -47,6 +75,12 @@
         <image src='../../images/rig.png'></image>
       </view>
     </view>
-  </view>
+  </view><view class='moree'>
+更多精彩
+</view>
+<view class='littleapp' >
+<navigator class='openlittleapp' target="miniProgram" open-type="navigate" app-id="wx7245add0c1844d9a" path="pages/index/index" extra-data="" version="release">打开绑定的小程序</navigator>
+<image src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/jietu.png'></image>
+</view>
   <button wx:if="{{!hasUserInfo && canIUse}}" class='userinfo' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 </view>

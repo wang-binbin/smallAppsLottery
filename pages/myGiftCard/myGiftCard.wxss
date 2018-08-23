@@ -1,4 +1,48 @@
 /* pages/myGiftCard/myGiftCard.wxss */
+
+.swiper-tab {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: #fff;
+  text-align: center;
+  line-height: 80rpx;
+  border-top: 1px solid #f2f2ef;
+}
+
+.swiper-tab-bott {
+  position: absolute;
+  height: 8rpx;
+  border-radius: 50rpx;
+  width: 70rpx;
+  background: #fa7635;
+  bottom: 0;
+  left: 36%;
+}
+
+.swiper-tab-list {
+  font-size: 32rpx;
+  position: relative;
+  display: inline-block;
+  width: 33.33%;
+  color: #7a7a7a;
+}
+
+.helpfixed {
+  clear: both;
+  height: 100rpx;
+  width: 100%;
+  background: #f2f2ef;
+}
+
+.on {
+  color: #fa7635;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+
 .awaitTitle{
   font-size: 13px;
 color: #959595;
@@ -11,8 +55,9 @@ margin: 20px 0 12px 15px;
 background: #fff;
   height: 60px;
   line-height: 60px;
-  padding: 0 15px; 
+  margin: 0 15px; 
   margin-top: 10px;
+  border-bottom: 1px #d8d8d8 solid;
 }
 .logo image{
   width: 6px;

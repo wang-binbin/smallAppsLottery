@@ -1,0 +1,43 @@
+
+<!--pages/authentication/authentication.wxml-->
+<view wx:if='{{isPass==null}}'>
+
+<view class='title'>提取之前需进行实名认证</view>
+<view class='head'>
+<view class='hradTxt'>真实姓名</view>
+<input class='headInput' maxlength='5' bindinput='name'  placeholder='请输入真实姓名'></input>
+</view>
+<view class='head' style='border:none'>
+<view class='hradTxt'>身份证号码</view>
+<input class='headInput' type='idcard' bindinput='idcard' maxlength='18' placeholder='请输入身份证号码'></input>
+</view>
+<view class='padding'> </view>
+<view class='content'>
+<view class='contentTxt'>身份证照片上传 :</view>
+
+<view class='contentImg' bindtap='idCardJ'>
+<image class='back' src='{{idCardJ}}'></image>
+<image src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/photograph.png' class='photograph' wx:if='{{photographJ}}'></image>
+</view>
+
+<view class='contentImg contentImgr' bindtap='idCardA'>
+<image class='back' src='{{idCardA}}'></image>
+<image src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/photograph.png' class='photograph' wx:if='{{photographA}}'></image>
+</view>
+<view class='leftTxt'>身份证人像面
+</view>
+<view class='rightTxt'>身份证国徽面</view>
+  <view class='bottom'>
+    <form bindsubmit="sub" bindreset="formReset" report-submit='true'>
+      提交审核
+      <button class='Submit' formType="submit"  disabled='{{lock}}'>Submit</button>
+    </form>
+  </view>
+</view> </view>
+<view wx:if='{{isPass!=null}}'>
+<view class='isPassImg'>
+<image  src="{{isPass=='1'?'https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/await.png':isPass=='2'?'https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/pass.png':isPass=='0'?'https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/loser.png':''}}"></image></view>
+<view class='isPassTxt'>
+{{isPass=='1'?'审核中':isPass=='2'?'实名认证已通过':isPass=='0'?'实名认证未通过':''}}
+</view>
+<view class='again' bindtap='again' wx:if='{{isPass=="0"}}' >重新上传</view></view>

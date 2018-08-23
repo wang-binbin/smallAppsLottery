@@ -1,0 +1,32 @@
+<!--pages/editor/editor.wxml-->
+
+<view wx:for='{{list}}' wx:key='index'>
+<view class='copy' wx:if='{{item.type=="copy"}}'>
+<input class='copyTitle' data-index='{{index}}' value='{{item.title}}' bindinput='copyTitle'></input>
+<view class='copyCon'>
+<input value='{{item.value}}' data-index='{{index}}' bindinput='copyCon'></input>
+</view>
+<view class='copyBtn'>点此一键复制</view>
+  <image class='closeImg' data-index='{{index}}' bindtap='closeImg'  src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/close.png'></image>
+</view>
+  <textarea wx:if='{{item.type=="text"}}' bindinput='bindTextAreaBlur' auto-height value='{{item.value}}' maxlength='-1' data-index='{{index}}' />
+  <view class='img' wx:if='{{item.type=="img"}}'>
+  <image class='closeImg' data-index='{{index}}' bindtap='closeImg'  src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/close.png'></image>
+  <image mode='aspectFit'  src='{{item.src}}'></image>
+  </view>
+</view>
+
+
+<textarea placeholder='填写此次抽奖的图文详情' bindinput='commonValue' auto-height value='{{commonValue}}' placeholder-style='font-size: 14px;color: #B7B7B7;' maxlength='-1' style='  margin-bottom: 150px;'/>
+<view class='isOpen' bindtap='isOpen'>
+  <image src='{{isOpen?"https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/jia.png":!isOpen?"https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/guanbi.png":""}}'></image>
+</view>
+<view class='addList' wx:if='{{!isOpen}}'>
+ 
+  <view class='addImg' bindtap='addImg'>插入图片
+    <image src='../../images/appendPhoto.png'></image>
+  </view>
+   <view class='addCopy' bindtap='addCopy'>插入一键复制区
+    <image src='../../images/appendCopy.png'></image></view>
+</view>
+<view class='over' bindtap='over'>完成</view>

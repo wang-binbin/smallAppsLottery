@@ -8,14 +8,40 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [],
-    listOpen: []
+    openList: [],
+    closedList: [],
+    wonListWidth: 0,
+    wonListHeight: 0,
+    // tab切换  
+    currentTab: 0,
   },
   particulars: function(e) { //查看详情
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '../particulars/particulars?giftId=' + id + "&pageId=0"
     })
+  }, /** 
+   * 滑动切换tab 
+   */
+  bindChange: function (e) {
+    var that = this;
+    that.setData({
+      currentTab: e.detail.current
+    });
+
+  },
+  /** 
+   * 点击tab切换 
+   */
+  swichNav: function (e) {
+    var that = this;
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -26,7 +52,16 @@ Page({
     })
     let that = this
 
-  
+    wx.getSystemInfo({
+      success: function (res) {
+
+        that.setData({
+          wonListWidth: res.windowWidth,
+          wonListHeight: res.windowHeight
+        });
+      }
+
+    });
     common.req({
       url: 'user/getCreatedGifts',
       data: {},
@@ -38,8 +73,8 @@ Page({
       success: function(res) {
         console.log(res)
         that.setData({
-          list: res.data.data.openList,
-          listOpen: res.data.data.closedList,
+          openList: res.data.data.openList,
+          closedList: res.data.data.closedList,
         })
         function setDate(date) {
           let getHours, getMinutes, getMonth, getDate;
@@ -69,7 +104,7 @@ Page({
           return newData;
 
         }
-        for (var i = 0; i < that.data.list.length; i++) {
+        for (var i = 0; i < that.data.openList.length; i++) {
           let str = that.data.list[i].awardTime;
           str = str.replace(/-/g, '/');
           let date = new Date(str);
@@ -80,7 +115,7 @@ Page({
             [item]: awardTime
           })
         }
-        for (var i = 0; i < that.data.listOpen.length; i++) {
+        for (var i = 0; i < that.data.closedList.length; i++) {
           let str = that.data.listOpen[i].awardTime;
           str = str.replace(/-/g, '/');
           let date = new Date(str);
@@ -90,8 +125,63 @@ Page({
             [item]: awardTime
           })
         }
-
-
+      },
+    })
+  },
+  moreData: function () {
+    let that = this;
+    let page;
+    let listType;
+    if (that.data.currentTab == 0) {
+      page = that.data.openList.number
+      listType = 'openList'
+      if (that.data.openList.last) {
+        return
+      }
+    } else if (that.data.currentTab == 1) {
+      page = that.data.closedList.number
+      listType = 'closedList'
+      if (that.data.closedList.last) {
+        return
+      }
+    } 
+    wx.showLoading({
+      title: '玩命加载中...',
+    })
+    // 页数+1
+    common.req({
+      url: 'user/getParticipatedGifts',
+      data: {
+        "page": parseInt(page) + 1,
+        "listType": listType
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      dataType: 'json',
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        if (res.data.data.closedList != null) {
+          for (let i = 0; i < res.data.data.closedList.content.length; i++) {
+            res.data.data.closedList.content[i].picPath = app.FILE_URL + res.data.data.closedList.content[i].picPath
+            that.data.closedList.content.push(res.data.data.closedList.content[i])
+          }
+          res.data.data.closedList.content = that.data.closedList.content
+          that.setData({
+            closedList: res.data.data.closedList
+          })
+        } else if (res.data.data.openList != null) {
+          for (let i = 0; i < res.data.data.openList.content.length; i++) {
+            res.data.data.openList.content[i].picPath = app.FILE_URL + res.data.data.openList.content[i].picPath
+            that.data.openList.content.push(res.data.data.openList.content[i])
+          }
+          res.data.data.openList.content = that.data.openList.content
+          that.setData({
+            openList: res.data.data.openList
+          })
+        } 
+        wx.hideLoading()
       },
     })
   },

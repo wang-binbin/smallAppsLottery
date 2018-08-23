@@ -112,9 +112,10 @@ Page({
           }
         })
         wx.downloadFile({ //把图片下载下来
-          url: that.data.userInfo.avatarUrl,
+          url: that.data.item.createrInfo.avatarUrl,
           success: function (res) {
             if (res.statusCode === 200) {
+              console.log(res)
               that.setData({
                 avatarUrl: res.tempFilePath
               })
@@ -222,7 +223,8 @@ Page({
       if (giftPhoto == null) {
         giftPhoto = ' ../../images/default.png'
       }
-      var avatarUrl = that.data.item.createrInfo.avatarUrl == null ? '../../images/defaultUrl.png' : that.data.item.createrInfo.avatarUrl
+      var avatarUrl = that.data.avatarUrl == null ? '../../images/defaultUrl.png' : that.data.avatarUrl
+      console.log(avatarUrl)
       //设置画板显示，才能开始绘图
       that.setData({
         canvasHidden: false
@@ -278,9 +280,11 @@ Page({
       context.fillText(wxappName, unit * 375 / 2, unit * 513)
       context.setFillStyle("#9f9f9f")
       context.setTextAlign('center')
+      context.beginPath()
       context.arc(avatarurl_width / 2 + avatarurl_x, avatarurl_heigth / 2 + avatarurl_y, avatarurl_width / 2, 0, Math.PI * 2, false);//切圆形图
       context.clip();
       context.drawImage(avatarUrl, avatarurl_x, avatarurl_y, avatarurl_width, avatarurl_heigth);
+      context.restore(); 
       context.draw(false, function () {
         wx.canvasToTempFilePath({//将图片绘制
           x: 0,

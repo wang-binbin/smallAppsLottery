@@ -9,15 +9,14 @@
   box-sizing: border-box;
 } 
 
-.body {
-  background: #f2f2ef;
-  height: 100%;
-  position: absolute;
-  overflow-y: auto;
-  width: 100%;
-  left: 0;
-  top: 0;
-}
+
 .clear{
+  display: block;
   clear: both;
+}
+.more{
+  text-align: center;
+  font-size: 14px;
+  color: #fa7635;
+  line-height: 60px;
 }

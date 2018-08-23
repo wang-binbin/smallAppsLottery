@@ -231,9 +231,11 @@ Page({
       context.setFillStyle("#9f9f9f")
       context.setFontSize(13)
       context.setTextAlign('center')
+      context.beginPath()
       context.arc(avatarurl_width / 2 + avatarurl_x, avatarurl_heigth / 2 + avatarurl_y, avatarurl_width / 2, 0, Math.PI * 2, false);//切圆形图
       context.clip();
       context.drawImage(avatarUrl, avatarurl_x, avatarurl_y, avatarurl_width, avatarurl_heigth);
+      context.restore(); 
       context.draw(false, function () {
         wx.canvasToTempFilePath({//将图片绘制
           x: 0,

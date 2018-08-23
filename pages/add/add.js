@@ -10,8 +10,11 @@ Page({
    */
   data: {
     array: ['钱包地址领奖', '收货地址领奖', '手机号领奖', '添加官方微信领奖'],
+    popUp: false,
     lock: false,
+    expireTime: false,
     wayOfGiving: 0,
+    vipExpiryTime: null,
     WechatAccept: false,
     byte: false,
     bytenumber: false,
@@ -46,6 +49,11 @@ Page({
 
     }
   },
+  addImgTxt: function () {
+    wx: wx.navigateTo({
+      url: '../editor/editor',
+    })
+  },
   Wechat: function (event) {
     let that = this;
     that.setData({
@@ -53,40 +61,48 @@ Page({
     })
 
   },
-  inputchange: function (event) { //输入奖品名称时判断字节
-    var that = this;
-    // var str = event.detail.value;
-    // var bytes = new Array();
-    // var len, c;
-    // len = str.length;
-    // for (var i = 0; i < len; i++) {
-    //   c = str.charCodeAt(i);
-    //   if (c >= 0x010000 && c <= 0x10FFFF) {
-    //     bytes.push(((c >> 18) & 0x07) | 0xF0);
-    //     bytes.push(((c >> 12) & 0x3F) | 0x80);
-    //     bytes.push(((c >> 6) & 0x3F) | 0x80);
-    //     bytes.push((c & 0x3F) | 0x80);
-    //   } else if (c >= 0x000800 && c <= 0x00FFFF) {
-    //     bytes.push(((c >> 12) & 0x0F) | 0xE0);
-    //     bytes.push(((c >> 6) & 0x3F) | 0x80);
-    //     bytes.push((c & 0x3F) | 0x80);
-    //   } else if (c >= 0x000080 && c <= 0x0007FF) {
-    //     bytes.push(((c >> 6) & 0x1F) | 0xC0);
-    //     bytes.push((c & 0x3F) | 0x80);
-    //   } else {
-    //     bytes.push(c & 0xFF);
-    //   }
-    if (event.detail.value.length >= 20) {
-
-        that.setData({
-          byte: true
-        })
-    } else if (event.detail.value.length < 20) {
-
-        that.setData({
-          byte: false
+  isHome: function () {
+    this.setData({
+      popUp: !this.data.popUp
+    })
+  },
+  advanced: function () {//进入高级页面
+    let that = this
+    if (that.data.vipExpiryTime == null) {
+      that.setData({
+        expireTime: !this.data.expireTime
+      })
+    } else {
+      wx: wx.navigateTo({
+        url: '../addaAdvanced/addAdvanced',
+      })
+    }
+  },
+  copy: function (event) { //复制
+    wx.setClipboardData({
+      data: 'maggiekf01',
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            console.log(res.data) // data
+          }
         })
       }
+    })
+  },
+  inputchange: function (event) { //输入奖品名称时判断字节
+    var that = this;
+    if (event.detail.value.length >= 20) {
+
+      that.setData({
+        byte: true
+      })
+    } else if (event.detail.value.length < 20) {
+
+      that.setData({
+        byte: false
+      })
+    }
     // }
     that.setData({
       name: event.detail.value.replace(/\s+/g, '')
@@ -153,7 +169,7 @@ Page({
     that.setData({
       lock: true
     })
-    if (that.data.wayOfGiving ==3&&that.data.Wechat==null){
+    if (that.data.wayOfGiving == 3 && that.data.Wechat == null) {
       wx.showToast({
         title: '请填写客服微信号',
         icon: 'none',
@@ -163,7 +179,7 @@ Page({
         lock: false
       })
       return
-}
+    }
     let date = new Date();
     let hour = date.getHours() //计算小时数
     let minute = date.getMinutes() //计算分数
@@ -221,7 +237,7 @@ Page({
             "picPath": that.data.picKey,
             "awardTime": awardTime,
             "sponsor": '',
-            "introduction": '',
+            "introduction": app.globalData.introduction,
             "msgFormId": e.detail.formId,
             "wayOfGiving": parseInt(that.data.wayOfGiving) + 1,
             "awardWechat": that.data.Wechat
@@ -277,6 +293,8 @@ Page({
     })
 
 
+
+
     var dateObj = []; //生成最近三天的日期
     var date = new Date();
     var hour = date.getHours() //计算小时数
@@ -316,7 +334,7 @@ Page({
     })
 
   },
-  bindPickerChange: function (e) { 
+  bindPickerChange: function (e) {
     let that = this
     console.log(e.detail.value)
     if (e.detail.value == 3) {
@@ -326,7 +344,7 @@ Page({
     } else {
       that.setData({
         WechatAccept: false,
-        Wechat:null
+        Wechat: null
       })
     }
     that.setData({
@@ -426,7 +444,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let that = this
+    that.setData({
+      introduction: app.globalData.introduction
+    })
 
+    common.req({
+      url: 'user/getVipExpiryTime',
+      data: {},
+      dataType: 'json',
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        if (((new Date(res.data.data.vipExpiryTime.replace(/-/g, "\/"))) > (new Date()))) {
+          that.setData({
+            vipExpiryTime: res.data.data.vipExpiryTime
+          })
+        } else {
+          that.setData({
+            vipExpiryTime: null
+          })
+        }
+      },
+    })
   },
 
   /**

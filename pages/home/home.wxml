@@ -3,11 +3,12 @@
   <view class='head'>
     <view class='welfare'>通证福利</view>
     <view class='share'>
-
-      <!-- <view class='shareText'>分享给朋友</view>
-      <view class='shareIcon'>
+ <button open-type="share" class='shareBtn'></button>
+      <view class='shareText'>分享给朋友</view>
+      <view class='shareIco'>
+     
         <image src='../../images/share.png'></image>
-      </view> -->
+      </view>
     </view>
   </view>
   <view class='content'>
@@ -40,12 +41,12 @@
       成为赞助商
     </view>
   </view>
-  <view class='shareIcon' bindtap='shareIcon'>
-    <image src='../../images/sharePhoto.png'></image>
+  <view class='shareIcon' bindtap='shareIcon' wx:if='{{getSystemConfig.disableAdvancedGiftCard=="false"}}'>
+    <image src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/send.png'></image>
 
   </view>
 </view>
-<view class='masking' wx:if='{{hidden}}'>
+<!-- <view class='masking' wx:if='{{hidden}}'>
   <view class='maskingConten'>
     <view class='mHeadImg'>
       <image src='../../images/shareTop.png'></image>
@@ -64,9 +65,5 @@
 立即邀请
     <button open-type="share" class='shareBtn'></button>
 </view>
-
-
   </view>
-
-
-</view>
+</view> -->

@@ -1,0 +1,121 @@
+/* pages/editor/editor.wxss */
+textarea{
+  font-size: 14px;
+  color: #2E2E2E;
+  line-height: 20px;
+  margin: 0 15px;
+  width: auto;
+
+}
+.isOpen{
+  position: fixed;
+  bottom: 80px;
+  right: 15px;
+}
+.isOpen image{
+  width: 60px;
+  height: 60px;
+
+}
+.addList view{
+  position: relative;
+text-indent: 3em;
+line-height: 50px;
+font-size: 15px;
+color: #FFFFFF;
+  margin-top: 15px;
+  }
+.addList{
+  width: 180px;
+  position: fixed;
+  right: 15px;
+  bottom: 160px;
+
+}
+.addList image{
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 180px;
+  height: 50px;
+}
+.img{
+  position: relative;
+  margin: 10px 15px;
+}
+.img image{
+width: 100%;
+}
+.img .closeImg{
+width: 20px;
+height: 20px;
+position: absolute;
+right: 0px;
+top: 0px;
+padding: 10px;
+}
+
+
+.copy{
+  height: 220px;
+  border: 3px solid #E9E9E9;
+border-radius: 5px;
+position: relative;
+margin: 10px 15px;
+}
+.copy .closeImg{
+width: 20px;
+height: 20px;
+position: absolute;
+right: 0px;
+top: 0px;
+padding: 10px;
+}
+.copyTitle{
+  width: 200px;
+  text-align: center;
+  font-size: 15px;
+color: #7C5F51;
+margin: 23px auto;
+}
+.copyCon{
+  margin: 0 33px;
+  height: 75px;
+ background: #F6F6F6;
+border-radius: 5px;
+
+}
+.copyCon input{
+  width: 200px;
+  margin: 0 auto;
+padding-top: 26px;
+text-align: center;
+  font-size: 15px;
+color: #7C5F51;
+}
+.copyBtn{
+  margin: 0 auto;
+  margin-top: 17px;
+  
+  width: 180px;
+  height: 40px;
+  background: #7C5F51 ;
+border-radius: 50px;
+text-align: center;
+line-height: 40px;
+font-size: 15px;
+color: #FFFFFF;
+}
+.over{
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 50px;
+  text-align: center;
+  background: #FA7635;
+  font-size: 15px;
+color: #FFFFFF;
+}

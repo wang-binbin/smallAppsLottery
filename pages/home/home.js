@@ -47,10 +47,12 @@ Page({
   },
   shareIcon:function(){//显示提问框
 let that=this
-that.setData({
-  hidden:true
+// that.setData({
+//   hidden:true
+// })
+wx:wx.navigateTo({
+  url: '../addaAdvanced/addAdvanced',
 })
-
   },
   mCloseImg: function () {//隐藏提问框
     let that = this
@@ -131,9 +133,24 @@ that.setData({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    let that=this
     wx.setStorage({
       key: "tabIndex",
       data: 0
+    })
+    common.req({
+      url: 'getSystemConfig',
+      data: '',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      dataType: 'json',
+      method: 'POST',
+      success: function (res) {
+        that.setData({
+          getSystemConfig: res.data.data
+        })
+      },
     })
   },
 

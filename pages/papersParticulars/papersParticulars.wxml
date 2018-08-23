@@ -1,0 +1,18 @@
+<!--pages/papersParticulars/papersParticulars.wxml-->
+
+<view class='banner'>
+  <image class='bannerBack' src='https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/back.png'></image>
+  <view class='headImg'><image src='{{options.picPath}}'></image></view>
+  <view class='token'>{{options.symbol}}</view>
+  <view class='tokenNum'>{{options.balance}}</view>
+  <view class='reserved_amount'>最少保留{{options.minEnvelopeAmount}}{{options.symbol}}</view>
+</view>
+<view class='padding'></view>
+<view class='content'>
+<view class='contentHead'>简介：</view>
+<text class='contentTxt'>{{options.introduction}}</text>
+</view>
+<view class='bottom'>
+<view  bindtap='deposit'>提现</view>
+<view class='deposit' bindtap='balanceList' data-id='{{item.token.symbol}}'>查看明细</view>
+</view>

@@ -1,0 +1,66 @@
+/* pages/deposit/deposit.wxss */
+
+page {
+  background: #f2f2ef;
+}
+
+.content {
+  padding: 0 15px;
+  background: #fff;
+}
+
+.receiveBy{
+  float: left;
+  line-height: 50px;
+}
+
+.input {
+   float: left;
+  line-height: 50px;
+  margin-left: 17px;
+  font-size: 15px;
+  margin-top: 15px;
+  width: 200px;
+}
+
+.padding {
+  height: 15px;
+  clear: both;
+}
+
+.receive {
+  height: 50px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.receiveBy {
+  font-size: 16px;
+  color: #444;
+}
+
+.inputNum {
+  margin-left: 32px;
+}
+
+.deposit {
+  margin-left: 15px;
+  font-size: 13px;
+  line-height: 40px;
+  color: #888;
+}
+
+.butt {
+  margin: 0 auto;
+  width: 345px;
+  height: 46px;
+  background: #fa7635;
+  border-radius: 3.5px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 46px;
+  color: #fff;
+  margin-top: 60px;
+}
+.balanceColor{
+ color: #fa7635; 
+}

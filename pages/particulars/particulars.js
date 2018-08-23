@@ -90,8 +90,7 @@ console.log(res)
           if (that.data.item.participantList.length <= 0) {
             firstUrl.unshift(that.data.userInfo.avatarUrl)
           } else if (that.data.item.participantList.length == 8) {
-            firstUrl.splice(7, 1)
-            firstUrl.unshift(that.data.userInfo.avatarUrl)
+            that.data.item.participantList[0] = that.data.userInfo.avatarUrl
           } else if (0 < that.data.item.participantList.lengt < 8) {
             firstUrl.unshift(that.data.userInfo.avatarUrl)
           }
@@ -185,7 +184,15 @@ return
 
 
   },
+  copyBtn:function(e){
 
+    wx.setClipboardData({
+      data: e.target.dataset.copy,
+      success: function (res) {
+
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -218,12 +225,33 @@ return
         dataType: 'json',
         method: 'POST',
         success: function (res) {
+          
           let str = res.data.data.giftCard.awardTime;
           str = str.replace(/-/g, '/');
           let date = new Date(str);
           let awardTime = setDate(date)
           res.data.data.giftCard.awardTime = awardTime,
             res.data.data.giftCard.picPath = app.FILE_URL + res.data.data.giftCard.picPath
+          try {
+            if (res.data.data.giftCard.introduction != 'null' && res.data.data.giftCard.introduction != '') {
+              res.data.data.giftCard.introduction = JSON.parse(decodeURIComponent(res.data.data.giftCard.introduction))
+              for (let i = 0; i < res.data.data.giftCard.introduction.length; i++) {
+                if (res.data.data.giftCard.introduction[i].type == 'img') {
+                  res.data.data.giftCard.introduction[i].src = app.FILE_URL + res.data.data.giftCard.introduction[i].src
+                }
+              }
+            }
+          }
+          catch (err) {
+            let array=[]
+            array.push({
+              "type":"text",
+              "value": res.data.data.giftCard.introduction
+            })
+            res.data.data.giftCard.introduction=array
+          }
+       
+        
           if (res.data.data.participantCount > 8) {
             that.setData({
               beyond: '...'

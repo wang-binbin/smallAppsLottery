@@ -1,24 +1,180 @@
 /* pages/add/add.wxss */
 
-.body {
-  background: #f2f2ef;
+.popUp {
+  background: rgba(0, 0, 0, 0.2);
   height: 100%;
-  position: absolute;
+  position: fixed;
   width: 100%;
   left: 0;
   top: 0;
+  z-index: 2;
+}
+.imgTxtTitle{
+  height: 42px;
+  text-indent: 1em;font-size: 13px;
+  line-height: 42px;
+color: #838383;
+}
+.imgTxtCon{
+  height: 90px;
+  background: #fff;
+  position: relative;
+}
+.addImgTxt{
+  background: #F6F6F6;
+border-radius: 5px;
+width: 200px;
+height: 55px;
+text-align: center;
+position: absolute;
+left: 50%;
+margin-left: -100px;
+margin-top: -27.5px;
+top: 50%;
+line-height: 55px;
+font-size: 15px;
+color: #ACACAC;
+}
+
+.popUpContent {
+  width: 325px;
+  height: 380px;
+  background: #fff;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -162.5px;
+  margin-top: -190px;
+}
+
+.expireTimeContent {
+  height: 435px;
+  margin-top: -217px;
+}
+
+.close {
+  float: right;
+  margin-right: 14px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 13px;
+  height: 13px;
+}
+
+.close image {
+  width: 100%;
+  height: 100%;
+}
+
+.upTitle {
+  clear: both;
+  text-align: center;
+  margin-bottom: 27px;
+  font-size: 19px;
+  color: #3f3f3f;
+}
+
+.icon {
+  float: left;
+  width: 7px;
+  height: 7px;
+  margin-left: 32px;
+  margin-right: 7px;
+}
+
+/* .expireTimeicon {
+  margin-left: 75px;
+} */
+
+.icon image {
+  width: 100%;
+  height: 100%;
+}
+
+.upTxtContent {
+  margin-bottom: 6px;
+  float: left;
+  width: 251px;
+  font-size: 15px;
+  color: #5c5c5c;
+}
+
+.expireTimeTxtContent {
+  /* width: 180px; */
+  margin-top: 5px;
+}
+
+.upTxtContentB {
+  color: #2d2d2d;
+}
+
+.WeChatCode {
+  width: 118px;
+  height: 118px;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.addWeChat{
+  text-align: center;
+  font-size: 13px;
+color: #979797;
+}
+.wechatNuber{
+  color: #FA7635;
+}
+.WeChatCode image {
+  width: 100%;
+  height: 100%;
+}
+
+.btn {
+  clear: both;
+  width: 190px;
+  height: 40px;
+  background: #fa7635;
+  border-radius: 20px;
+  margin: 0 auto;
+  margin-top: 27px;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  font-size: 15px;
+}
+
+.hint {
+  font-size: 13px;
+  color: #848484;
+  line-height: 28px;
+  text-align: center;
+}
+
+.isHome {
+  clear: both;
+  font-size: 15px;
+  line-height: 50px;
+  text-align: center;
+  color: #fa7635;
+}
+
+page {
+  background: #f2f2ef;
 }
 
 .content {
   clear: both;
 }
+
 .Submit {
   width: 100%;
   height: 100%;
-  z-index: 2; opacity: 0; 
+  z-index: 2;
+  opacity: 0;
   top: 0;
   position: absolute;
 }
+
 .contentList {
   width: 100%;
 }
@@ -107,8 +263,7 @@
   margin-top: 13px;
   margin-right: 10px;
   text-align: right;
-  width:150px;
-
+  width: 150px;
 }
 
 .foot {
@@ -165,7 +320,11 @@
   background: #fa7635;
 }
 
-.head  .warning , .LotteryStart .warning{
+.bottomPadding {
+  height: 70px;
+}
+
+.head  .warning, .LotteryStart .warning {
   position: absolute;
   top: 10px;
   width: 145px;
@@ -173,38 +332,62 @@
   font-size: 10px;
   text-align: center;
   line-height: 30px;
-color: #FFFFFF;
+  color: #fff;
   z-index: 2;
   left: 67px;
-  background: url('https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/warning.png')  no-repeat;
-   background-size:cover;  
+  background: url('https://maggie-public.oss-cn-beijing.aliyuncs.com/littleApps/warning.png') no-repeat;
+  background-size: cover;
 }
+
 .head .prizeNumber .warning {
   left: 139px;
 }
-.LotteryStart .warning{
+
+.LotteryStart .warning {
   left: 80px;
 }
-.userinfo{
-width: 100%;
-height: 100%;
-position: absolute;
-left: 0;
-bottom: 0;
-z-index: 3;
-opacity:0;
-}
-.LotteryStyle{
-  clear: both;
-height: 10px;
-width: 100%;
-background: #f2f2ef;
 
+.userinfo {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+  opacity: 0;
 }
-.LotteryStart input{
+
+.LotteryStyle {
   clear: both;
-  font-size:16px;
-color:#444;
-padding-top: 10px;
-margin-left: 15px;
+  height: 10px;
+  width: 100%;
+  background: #f2f2ef;
+}
+
+.LotteryStart input {
+  clear: both;
+  font-size: 16px;
+  color: #444;
+  padding-top: 10px;
+  margin-left: 15px;
+}
+
+.advanced {
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  width: 128px;
+  height: 35px;
+  border: 1px solid #fa7635;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 35px;
+  color: #fa7635;
+  font-size: 16px;
+}
+
+.expireTime {
+  font-size: 13px;
+  color: #9f9f9f;
+  text-align: center;
 }
